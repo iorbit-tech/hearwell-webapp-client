@@ -1,7 +1,12 @@
-import "./App.css";
+import React from 'react'
+import LoginScreen from './Pages/LoginScreen/Index'
 
-function App() {
-  return <div className="App"></div>;
+const App = () => {
+  return (
+    <div>
+      <LoginScreen />
+    </div>
+  )
 }
 
-export default App;
+export default App
