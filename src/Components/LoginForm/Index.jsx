@@ -8,6 +8,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { Link } from "react-router-dom";
 
 const LoginForm = () => {
   const [values, setValues] = React.useState({
@@ -65,10 +66,10 @@ const LoginForm = () => {
           />
         </FormControl>
       </div>
-      <div style={{ marginLeft: '37%' }}>
-        <Button href="" style={{ backgroundColor: '#9E7BF9', color: '#fff', fontWeight: '600', }} variant="text">Register</Button>
-        <Button href="" style={{ backgroundColor: '#9E7BF9', color: '#fff', fontWeight: '600', marginLeft: 10, }} variant="text">Login</Button>
+      <div style={{ marginLeft: '40%' }}>
+        <Button style={{ backgroundColor: '#9E7BF9', color: '#fff', fontWeight: '600', marginLeft: 10, }} variant="text">Login</Button>
       </div>
+      <Link style={{ textDecoration: 'none', }} to="/register"><p style={{ textAlign: 'center', color: 'grey', fontWeight: '600', }} variant="text">Don't have an account? Sign Up</p></Link>
       <a style={{}} href=""><p style={{ marginLeft: '48%', }}>Forgot Password?</p></a>
     </Paper>
   )
