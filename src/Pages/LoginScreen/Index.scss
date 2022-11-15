@@ -1,20 +1,26 @@
-.container{
+.container {
     width: 100vw;
     height: 100vh;
-    background-color: red ;
-    display:flex;
+    background-color: #bba1fb;
+    display: flex;
     flex-direction: column;
 
-    .title-bar{
-       
+    .title-bar {
+        background-color: #9E7BF9;
     }
-    .body-cont{
-       display: flex;
-       .left-box{
-        
-        width: 50vw;
-        height: 100vh;
-       }
+
+    .body-cont {
+        display: flex;
+
+        // .left-box {
+        //     width: 50vw;
+        //     height: 100vh;
+        // }
+
+        .right-box {
+            width: 100%;
+            margin-left: 40%;
+        }
     }
 
 }
