@@ -12,10 +12,12 @@
     .body-cont {
         display: flex;
 
-        // .left-box {
-        //     width: 50vw;
-        //     height: 100vh;
-        // }
+        .left-box {
+            width: 20vw;
+            height: 100vh;
+            background-color: #9E7BF9;
+            margin-top: 5px;
+        }
 
         .right-box {
             width: 100%;

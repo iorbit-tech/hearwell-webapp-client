@@ -67,7 +67,7 @@ const LoginForm = () => {
         </FormControl>
       </div>
       <div style={{ marginLeft: '40%' }}>
-        <Button style={{ backgroundColor: '#9E7BF9', color: '#fff', fontWeight: '600', marginLeft: 10, }} variant="text">Login</Button>
+        <Link style={{ textDecoration: 'none', }} to="/dashboard"> <Button style={{ backgroundColor: '#9E7BF9', color: '#fff', fontWeight: '600', marginLeft: 10, }} variant="text">Login</Button> </Link>
       </div>
       <Link style={{ textDecoration: 'none', }} to="/register"><p style={{ textAlign: 'center', color: 'grey', fontWeight: '600', }} variant="text">Don't have an account? Sign Up</p></Link>
       <a style={{}} href=""><p style={{ marginLeft: '48%', }}>Forgot Password?</p></a>
