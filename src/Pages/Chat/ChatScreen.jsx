@@ -20,18 +20,15 @@ const ChatScreen = ({ user }) => {
             let Addmtype = inputReferance.current.value || token();
             Addmtype = 'text'
             setStatus('read')
-            setMessageListArray([...messageListArray, randomMessage(Addmtype)])
-            // setMessageListArray([...messageListArray, inputReferance.current.value])
-            clearRef()
-            forceUpdate()
+            setMessageListArray([...messageListArray, randomMessage(Addmtype),])
         }
     }, [currentText]);
 
-
-    console.log(messageListArray, 'messageListArray')
     const addMessage = (data) => {
-        console.log(inputReferance.current.value, 'inputReferance')
         setCurrentText(inputReferance.current.value)
+        inputReferance.current.value = '';
+        clearRef()
+        // forceUpdate()
     }
 
     function useForceUpdate() {
@@ -48,7 +45,7 @@ const ChatScreen = ({ user }) => {
         id: String(Math.random()),
         position: 'right',
         text: currentText,
-        // title: 'Title',
+        title: 'You',
         focus: true,
         // date: +new Date(),
         dateString: 'now',
@@ -56,8 +53,8 @@ const ChatScreen = ({ user }) => {
         titleColor: 'red',
         // forwarded: true,
         // replyButton: true,
-        removeButton: true,
-        status: 'received',
+        // removeButton: true,
+        // status: 'received',
         notch: false,
         copiableDate: true,
         retracted: false,
@@ -89,36 +86,35 @@ const ChatScreen = ({ user }) => {
                         downButtonBadge={10}
                         sendMessagePreview={true}
                     />
-                </div>
-                <div
-                    style={{
-                        position: 'fixed',
-                        bottom: 0,
-                        right: 0,
-                        left: 0,
-                        margin: '0 auto 1rem auto',
-                        width: '60%',
-                    }}
-                >
-                    <InputField
-                        className='rce-example-input'
-                        placeholder='Write your message here.'
-                        defaultValue=''
-                        referance={inputReferance}
-                        maxHeight={50}
-                        clear={(clear) => (clearRef = clear)}
-                        onKeyPress={(e) => {
-                            if (e.shiftKey && e.charCode === 13) {
-                                return true
-                            }
-                            if (e.charCode === 13) {
-                                clearRef()
-                                addMessage(token())
-                            }
+                    <div
+                        style={{
+                            position: 'absolute',
+                            bottom: 0,
+                            width: '100%',
                         }}
-                        rightButtons={<SendButton text='Submit' onClick={() => addMessage(token())} />}
-                    />
+                    >
+                        <InputField
+                            className='rce-example-input'
+                            placeholder='Write your message here.'
+                            defaultValue=''
+                            referance={inputReferance}
+                            maxHeight={50}
+                            clear={(clear) => (clearRef = clear)}
+                            onKeyPress={(e) => {
+
+                                if (e.shiftKey && e.charCode === 13) {
+                                    return true
+                                }
+                                if (e.charCode === 13) {
+                                    clearRef()
+                                    addMessage(token())
+                                }
+                            }}
+                            rightButtons={<SendButton text='Submit' onClick={() => addMessage(token())} />}
+                        />
+                    </div>
                 </div>
+
             </div>
         </div >
     );

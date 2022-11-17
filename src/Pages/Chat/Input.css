@@ -17,6 +17,9 @@
     font-size: 14px;
     box-sizing: border-box;
     outline: none;
+    background-color: rgb(221, 221, 221);
+    margin-left: 10px;
+    margin-bottom: 1px;
 }
 
 .rce-input-textarea {
