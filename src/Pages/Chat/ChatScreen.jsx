@@ -6,7 +6,7 @@ import { MessageList } from "react-chat-elements";
 import InputField from "./InputField";
 import SendButton from "./SendButton";
 
-const ChatScreen = ({ user }) => {
+const ChatScreen = ({ user, closeChat }) => {
     const [messageListArray, setMessageListArray] = useState([]);
     const [currentText, setCurrentText] = useState('');
     const [status, setStatus] = useState('');
@@ -50,7 +50,7 @@ const ChatScreen = ({ user }) => {
         // date: +new Date(),
         dateString: 'now',
         // avatar: `data:image/png;base64,${photo(20)}`,
-        titleColor: 'red',
+        titleColor: '#4f81a1',
         // forwarded: true,
         // replyButton: true,
         // removeButton: true,
@@ -71,8 +71,11 @@ const ChatScreen = ({ user }) => {
     }
 
     return (
-        <div style={{ position: 'absolute', bottom: 0 }}>
-            <div style={{ backgroundColor: '#fff', height: 300, width: 400 }}>
+        <div style={{ position: 'absolute', bottom: 0, right: 50 }}>
+            <div style={{ backgroundColor: '#fff', height: 300, width: 400, }}>
+                <div onClick={() => closeChat()} style={{ float: 'right', margin: 10 }}>
+                    <button style={{ fontWeight: 'bold' }}>X</button>
+                </div>
                 <div style={{ backgroundColor: '#9E7BF9', height: 50, paddingLeft: 20, paddingBlock: 10 }}   >
                     <p style={{ fontWeight: 'bold' }}>Chat with {user}</p>
                 </div>

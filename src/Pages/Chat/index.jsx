@@ -13,11 +13,15 @@ const Chat = ({ props }) => {
         console.log(username)
     }
 
+    const closeChat = () => {
+        setChatClicked(0);
+    }
+
     return (
         <div>
-            <Table striped bordered hover>
+            <Table striped bordered hover className="userTable">
                 <thead>
-                    <tr>
+                    <tr className="userHeadRow" >
                         <th>ID</th>
                         <th>Date</th>
                         <th>User</th>
@@ -25,14 +29,14 @@ const Chat = ({ props }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr align="center">
+                    <tr className="usertBodyRow" align="center">
                         <td >1</td>
                         <td>11/10/2022</td>
                         <td>User1</td>
                         <td onClick={() => chatReply('User1')} style={{ fontWeight: '500' }} >Reply</td>
                         <td >Delete</td>
                     </tr>
-                    <tr align="center">
+                    <tr className="usertBodyRow" align="center">
                         <td>2</td>
                         <td>11/16/2022</td>
                         <td>User2</td>
@@ -42,9 +46,7 @@ const Chat = ({ props }) => {
                 </tbody>
             </Table>
             {chatClicked > 0 &&
-
-                <ChatScreen {...props} user={user} />
-
+                <ChatScreen {...props} user={user} closeChat={closeChat} />
             }
         </div>
     );

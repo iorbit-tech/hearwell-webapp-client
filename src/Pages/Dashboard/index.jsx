@@ -5,16 +5,18 @@ import "../LoginScreen/Index.scss";
 import Chat from "../Chat";
 const Dashboard = () => {
     return (
-        <div className="container">
+        <div className="container" style={{ height: '100%' }}>
             <link
                 rel="stylesheet"
                 href="https://fonts.googleapis.com/icon?family=Material+Icons"
             />
             <div className="title-bar">
-                <div style={{ flexDirection: 'row', width: '80%' }}>
-                    <h2 style={{ marginLeft: '40%', float: "left" }}>HearWell</h2>
-                    <Icon style={{ float: 'right' }}>notifications</Icon>
-                    <Icon style={{ float: 'right' }}>home</Icon>
+                <div style={{ width: '80%' }}>
+                    <h1 style={{ position: 'relative', marginLeft: '40%', top: 20, float: "left", }}>HearWell</h1>
+                    <div style={{ top: 60, position: 'relative', }}>
+                        <Icon style={{ float: 'right' }}>notifications</Icon>
+                        <Icon style={{ paddingRight: 10, float: 'right' }}>home</Icon>
+                    </div>
                 </div>
             </div>
             <div className="body-cont">
