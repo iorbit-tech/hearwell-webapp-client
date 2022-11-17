@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "../LoginScreen/Index.scss";
 import { Table } from "@mui/material";
+import ChatScreen from "./ChatScreen";
 
-const Chat = () => {
+const Chat = ({ props }) => {
     const [chatClicked, setChatClicked] = useState(0);
     const [user, setUser] = useState('');
 
@@ -41,9 +42,9 @@ const Chat = () => {
                 </tbody>
             </Table>
             {chatClicked > 0 &&
-                <div>
-                    <p>test</p>
-                </div>
+
+                <ChatScreen {...props} user={user} />
+
             }
         </div>
     );
