@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 const LoginForm = () => {
   const [values, setValues] = React.useState({
     password: '',
+    username: '',
     showPassword: false,
   });
 
@@ -30,6 +31,7 @@ const LoginForm = () => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+  console.log(values, 'values')
   return (
     <Paper elevation={3} style={{ height: 450, width: 420, marginTop: 50, alignSelf: 'center', justifyContent: 'center' }}>
       <h3 style={{ textAlign: 'center', paddingTop: 20 }}>Login</h3>
@@ -41,6 +43,8 @@ const LoginForm = () => {
             label="UserName"
             // defaultValue="UserName"
             margin="normal"
+            value={values.username}
+            onChange={handleChange('username')}
           />
         </FormControl>
         <FormControl style={{ marginLeft: '25%' }} sx={{ m: 1, width: '25ch' }} variant="outlined">
