@@ -12,6 +12,9 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { baseUrl } from "../../Webservice/Webservice";
+import axios from "axios";
+import { validEmail } from "../../utils/Regex";
 
 function Copyright(props) {
   return (
@@ -34,15 +37,49 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function RegForm() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  const signUpData = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
   };
 
+  const [user, setUser] = React.useState({ signUpData });
+  const [error, setError] = React.useState("");
+  const onChangeHanddle = (e) => {
+    // if (!validEmail.test(e.target.value)) {
+    //   setError("Enter valid email");
+    // } else {
+    //   setError("");
+    // }
+    const { name, value } = e.target;
+    console.log(name);
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const data = new FormData(event.currentTarget);
+    const userData = {
+      firstName: data.get("firstName"),
+      lastName: data.get("lastName"),
+      email: data.get("email"),
+      password: data.get("password"),
+    };
+    if (!validEmail.test(userData.email)) {
+      setError("Enter valid email");
+    } else {
+      axios
+        .post(baseUrl + "/api/user", userData)
+        .then((res) => console.error(res, "responseee"))
+        .catch((err) => console.error(err));
+    }
+    console.log({
+      userData,
+    });
+  };
+  React.useEffect(() => {
+    console.log(error);
+  }, [error]);
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -71,6 +108,9 @@ export default function RegForm() {
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  error={false}
+                  onChange={(e) => onChangeHanddle(e)}
+                  // helperText={error}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -81,6 +121,7 @@ export default function RegForm() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  onChange={(e) => onChangeHanddle(e)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -91,6 +132,9 @@ export default function RegForm() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={(e) => onChangeHanddle(e)}
+                  error={error == "" ? false : true}
+                  helperText={error}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -102,6 +146,7 @@ export default function RegForm() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={(e) => onChangeHanddle(e)}
                 />
               </Grid>
 
@@ -122,7 +167,7 @@ export default function RegForm() {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                 Cancel
+                  Cancel
                 </Button>
               </Grid>
             </Grid>
@@ -130,7 +175,7 @@ export default function RegForm() {
             <Grid container justifyContent="flex-end"></Grid>
           </Box>
         </Box>
-        {/* <Copyright sx={{ mt: 5 }} /> */}
+        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );

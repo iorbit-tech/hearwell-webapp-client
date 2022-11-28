@@ -5,12 +5,14 @@ import Home from "./Pages/Home";
 import DashBoard from "./Pages/Dashboard/Dashboard";
 import RegForm from "./Components/RegForms/Form";
 import Login from "./Components/LoginForm/Index";
+import RegFormPage from "./Pages/RegistrationPage";
 
 const App = () => {
   return (
     <div>
       <Routes>
         <Route path="/login" element={<LoginScreen />} />
+        <Route path="/signup" element={<RegFormPage />} />
         <Route path="/" element={<DashBoard />}>
           <Route path="home" element={<Home />} />
           <Route path="form" element={<RegForm />} />
