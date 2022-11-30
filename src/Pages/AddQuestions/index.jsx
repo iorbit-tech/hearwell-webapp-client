@@ -1,4 +1,4 @@
-import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { Button, FormControl, InputLabel, MenuItem, Select, TextareaAutosize, TextField } from "@mui/material";
 import React, { useState } from "react";
 import "../LoginScreen/Index.scss";
 
@@ -9,8 +9,8 @@ const Questions = [
     { id: 3, question: 4, name: "At what age you started using the device?", },
     { id: 4, question: 5, name: "How long you are using this Brand of your Hearing Device?" },
 ];
-
-const Tellus = () => {
+console.log(MenuItem, 'MenuItem');
+const AddQuestions = () => {
     const [page, setPage] = useState(10);
     const [orderno, setOrderno] = useState(1);
     const [ansType, setAnsType] = useState(1);
@@ -35,10 +35,7 @@ const Tellus = () => {
     console.log("ansType", ansType);
     return (
         <div className="container">
-            <div style={{ width: '30%', alignSelf: 'center', }}>
-                <div>
-                    <h3 style={{ textAlign: 'center' }}>Tellus More</h3>
-                </div>
+            <div style={{ width: '30%', alignSelf: 'center', marginTop: 20 }}>
                 <div style={{ alignSelf: 'center', height: 100 }}>
                     <p style={{ float: 'left', marginTop: 25, width: 100 }}>Page:</p>
                     <FormControl style={{ float: 'right', marginLeft: 30 }} sx={{ m: 1, width: '25ch' }}>
@@ -55,13 +52,13 @@ const Tellus = () => {
                         </Select>
                     </FormControl>
                 </div>
-                <div style={{ alignSelf: 'center', height: 100 }}>
-                    <p style={{ float: 'left', marginTop: 35, width: 100 }}>Question:</p>
+                <div className="textAreaField" style={{ alignSelf: 'center', height: 100 }}>
+                    <p style={{ float: 'left', marginTop: 25, width: 100 }}>Question:</p>
                     <FormControl style={{ float: 'right', marginLeft: 30 }} sx={{ m: 1, width: '25ch', }} variant="outlined">
-                        <TextField
-                            id="outlined-required"
-                            label=""
-                            margin="normal"
+                        <TextareaAutosize
+                            aria-label=""
+                            placeholder=""
+                            style={{ width: 210, height: 50, borderRadius: 5, backgroundColor: '#00000000', }}
                         />
                     </FormControl>
                 </div>
@@ -99,40 +96,41 @@ const Tellus = () => {
                         </Select>
                     </FormControl>
                 </div>
-                <div style={{ alignSelf: 'center', height: 400 }}>
-                    <p style={{ float: 'left', marginTop: 35, width: 100 }}>Answer:</p>
-                    <div style={{ width: 100, float: 'right' }}>
-                        <FormControl style={{ float: 'right', marginLeft: 30 }} sx={{ m: 1, width: '25ch', }} variant="outlined">
-                            <TextField
-                                id="outlined-required"
-                                label=""
-                                margin="normal"
-                            />
-                        </FormControl>
-                        <FormControl style={{ float: 'right', marginLeft: 30 }} sx={{ m: 1, width: '25ch', }} variant="outlined">
-                            <TextField
-                                id="outlined-required"
-                                label=""
-                                margin="normal"
-                            />
-                        </FormControl>
-                        <FormControl style={{ float: 'right', marginLeft: 30 }} sx={{ m: 1, width: '25ch', }} variant="outlined">
-                            <TextField
-                                id="outlined-required"
-                                label=""
-                                margin="normal"
-                            />
-                        </FormControl>
-                        <FormControl style={{ float: 'right', marginLeft: 30 }} sx={{ m: 1, width: '25ch', }} variant="outlined">
-                            <TextField
-                                id="outlined-required"
-                                label=""
-                                margin="normal"
-                            />
-                        </FormControl>
+                {ansType !== 300 &&
+                    <div style={{ alignSelf: 'center', height: 400 }}>
+                        <p style={{ float: 'left', marginTop: 35, width: 100 }}>Answer:</p>
+                        <div style={{ width: 100, float: 'right' }}>
+                            <FormControl style={{ float: 'right', marginLeft: 30 }} sx={{ m: 1, width: '25ch', }} variant="outlined">
+                                <TextField
+                                    id="outlined-required"
+                                    label=""
+                                    margin="normal"
+                                />
+                            </FormControl>
+                            <FormControl style={{ float: 'right', marginLeft: 30 }} sx={{ m: 1, width: '25ch', }} variant="outlined">
+                                <TextField
+                                    id="outlined-required"
+                                    label=""
+                                    margin="normal"
+                                />
+                            </FormControl>
+                            <FormControl style={{ float: 'right', marginLeft: 30 }} sx={{ m: 1, width: '25ch', }} variant="outlined">
+                                <TextField
+                                    id="outlined-required"
+                                    label=""
+                                    margin="normal"
+                                />
+                            </FormControl>
+                            <FormControl style={{ float: 'right', marginLeft: 30 }} sx={{ m: 1, width: '25ch', }} variant="outlined">
+                                <TextField
+                                    id="outlined-required"
+                                    label=""
+                                    margin="normal"
+                                />
+                            </FormControl>
+                        </div>
                     </div>
-
-                </div>
+                }
                 <div style={{ float: 'right' }}>
                     <Button style={{ backgroundColor: '#9E7BF9', color: '#fff', fontWeight: '600', }} variant="text">
                         <span>Save</span>
@@ -145,4 +143,4 @@ const Tellus = () => {
     );
 };
 
-export default Tellus;
+export default AddQuestions;

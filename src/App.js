@@ -1,11 +1,11 @@
-import React from 'react'
-import ReactDOM from "react-dom/client";
+import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from './Pages/Dashboard';
-import LoginScreen from './Pages/LoginScreen/Index'
-import Register from './Pages/LoginScreen/Register'
+import LoginScreen from './Pages/LoginScreen/Index';
+import Register from './Pages/LoginScreen/Register';
 import Profile from './Pages/Profile';
-import Tellus from './Pages/Tell us';
+import AddQuestions from './Pages/AddQuestions';
+import Tellus from './Pages/Tellus';
 
 // const App = () => {
 //   return (
@@ -23,7 +23,8 @@ const App = () => {
         <Route path="register" element={<Register />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="profile" element={<Profile />} />
-        <Route path="tellus" element={<Tellus />} />
+        <Route path="addquestions" element={<AddQuestions />} />
+        <Route path="tellus" element={< Tellus />} />
       </Routes>
     </BrowserRouter>
   )
