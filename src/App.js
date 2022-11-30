@@ -5,6 +5,7 @@ import Dashboard from './Pages/Dashboard';
 import LoginScreen from './Pages/LoginScreen/Index'
 import Register from './Pages/LoginScreen/Register'
 import Profile from './Pages/Profile';
+import Tellus from './Pages/Tell us';
 
 // const App = () => {
 //   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="register" element={<Register />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="tellus" element={<Tellus />} />
       </Routes>
     </BrowserRouter>
   )

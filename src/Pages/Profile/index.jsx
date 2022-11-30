@@ -11,7 +11,7 @@ const Profile = () => {
                     <>
                         <nav style={{ marginTop: 100, marginLeft: 10 }}>
                             <Link style={{ textDecoration: 'none', display: 'block', fontWeight: '700', color: '#000' }} to="/">Edit Profile</Link>
-                            <Link style={{ textDecoration: 'none', display: 'block', marginTop: 20, fontWeight: '700', color: '#000' }} to="/blogs">View Qns</Link>
+                            <Link style={{ textDecoration: 'none', display: 'block', marginTop: 20, fontWeight: '700', color: '#000' }} to="/tellus">View Qns</Link>
                             <Link style={{ textDecoration: 'none', display: 'block', marginTop: 20, fontWeight: '700', color: '#000' }} to="/contact">Add FAQ</Link>
                             <Link style={{ textDecoration: 'none', display: 'block', marginTop: 20, fontWeight: '700', color: '#000' }} to="/contact">View Users Hearing Diary</Link>
                         </nav>

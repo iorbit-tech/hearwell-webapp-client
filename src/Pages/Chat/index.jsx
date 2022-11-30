@@ -33,15 +33,15 @@ const Chat = ({ props }) => {
                         <td >1</td>
                         <td>11/10/2022</td>
                         <td>User1</td>
-                        <td onClick={() => chatReply('User1')} style={{ fontWeight: '500' }} >Reply</td>
-                        <td >Delete</td>
+                        <td onClick={() => chatReply('User1')} style={{ fontWeight: '500', cursor: 'pointer' }} >Reply</td>
+                        <td onClick={() => ''} style={{ fontWeight: '400', cursor: 'pointer' }} >Delete</td>
                     </tr>
                     <tr className="usertBodyRow" align="center">
                         <td>2</td>
                         <td>11/16/2022</td>
                         <td>User2</td>
-                        <td onClick={() => chatReply('User2')} style={{ fontWeight: '500' }} >Reply</td>
-                        <td >Delete</td>
+                        <td onClick={() => chatReply('User2')} style={{ fontWeight: '500', cursor: 'pointer' }} >Reply</td>
+                        <td onClick={() => ''} style={{ fontWeight: '400', cursor: 'pointer' }}>Delete</td>
                     </tr>
                 </tbody>
             </Table>
