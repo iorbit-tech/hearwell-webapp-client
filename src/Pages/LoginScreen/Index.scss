@@ -103,4 +103,18 @@
         border: 2px solid #1a73e8;
         outline: none !important;
     }
+
+    .textAreaField textArea {
+        font-family: 'arial';
+        font-weight: 400 !important;
+        padding-left: 10px;
+        font-size: 17px;
+    }
+
+    .alertbox {
+        position: absolute;
+        bottom: 0;
+        align-items: center;
+        margin-left: 11%;
+    }
 }
