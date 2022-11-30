@@ -92,6 +92,16 @@ export default function DashBoard() {
       icon: <ArticleIcon />,
       nav: "form",
     },
+    {
+      text: "View Qns",
+      icon: <ArticleIcon />,
+      nav: "addquestions",
+    },
+    {
+      text: "Tellus More",
+      icon: <ArticleIcon />,
+      nav: "tellus",
+    },
   ];
   const [open, setOpen] = React.useState(
     window.innerWidth < 500 ? false : true

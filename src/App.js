@@ -6,6 +6,8 @@ import DashBoard from "./Pages/Dashboard/Dashboard";
 import RegForm from "./Components/RegForms/Form";
 import Login from "./Components/LoginForm/Index";
 import RegFormPage from "./Pages/RegistrationPage";
+import AddQuestions from "./Pages/AddQuestions";
+import Tellus from "./Pages/TellUs";
 
 const App = () => {
   return (
@@ -16,6 +18,8 @@ const App = () => {
         <Route path="/" element={<DashBoard />}>
           <Route path="home" element={<Home />} />
           <Route path="form" element={<RegForm />} />
+          <Route path="addquestions" element={<AddQuestions />} />
+          <Route path="tellus" element={< Tellus />} />
         </Route>
       </Routes>
     </div>
