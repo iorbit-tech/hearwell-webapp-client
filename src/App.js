@@ -8,6 +8,7 @@ import Login from "./Components/LoginForm/Index";
 import RegFormPage from "./Pages/RegistrationPage";
 import AddQuestions from "./Pages/AddQuestions";
 import Tellus from "./Pages/TellUs";
+import Chat from "./Pages/Chat";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="form" element={<RegForm />} />
           <Route path="addquestions" element={<AddQuestions />} />
           <Route path="tellus" element={< Tellus />} />
+          <Route path="chat" element={< Chat />} />
         </Route>
       </Routes>
     </div>

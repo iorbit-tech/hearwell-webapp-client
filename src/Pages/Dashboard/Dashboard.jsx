@@ -20,6 +20,7 @@ import { Navigate, Outlet, useNavigate } from "react-router-dom";
 // import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from "@mui/icons-material/Mail";
 import ArticleIcon from "@mui/icons-material/Article";
+import { ChatBubbleOutlineOutlined } from "@mui/icons-material";
 
 const drawerWidth = 240;
 
@@ -101,6 +102,11 @@ export default function DashBoard() {
       text: "Tellus More",
       icon: <ArticleIcon />,
       nav: "tellus",
+    },
+    {
+      text: "Chat",
+      icon: <ChatBubbleOutlineOutlined />,
+      nav: "chat",
     },
   ];
   const [open, setOpen] = React.useState(
