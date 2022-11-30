@@ -18,7 +18,7 @@ const Chat = ({ props }) => {
     }
 
     return (
-        <div style={{ marginTop: 100 }}>
+        <div className="container">
             <Table striped bordered hover className="userTable">
                 <thead>
                     <tr className="userHeadRow" >

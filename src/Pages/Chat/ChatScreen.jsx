@@ -71,7 +71,7 @@ const ChatScreen = ({ user, closeChat }) => {
     }
 
     return (
-        <div style={{ position: 'absolute', top: '78%', right: 50 }}>
+        <div style={{ position: 'absolute', top: '70%', right: 50 }}>
             <div style={{ backgroundColor: '#fff', height: 300, width: 400, }}>
                 <div onClick={() => closeChat()} style={{ float: 'right', margin: 10 }}>
                     <button style={{ fontWeight: 'bold' }}>X</button>
