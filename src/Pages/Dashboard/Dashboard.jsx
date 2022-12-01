@@ -108,6 +108,11 @@ export default function DashBoard() {
       icon: <ChatBubbleOutlineOutlined />,
       nav: "chat",
     },
+    {
+      text: "Questions Display",
+      icon: <ChatBubbleOutlineOutlined />,
+      nav: "questionsdisplay",
+    },
   ];
   const [open, setOpen] = React.useState(
     window.innerWidth < 500 ? false : true

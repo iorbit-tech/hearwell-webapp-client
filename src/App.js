@@ -9,6 +9,7 @@ import RegFormPage from "./Pages/RegistrationPage";
 import AddQuestions from "./Pages/AddQuestions";
 import Tellus from "./Pages/TellUs";
 import Chat from "./Pages/Chat";
+import QuestionsDisplay from "./Pages/QuestionsDisplay";
 
 const App = () => {
   return (
@@ -22,6 +23,8 @@ const App = () => {
           <Route path="addquestions" element={<AddQuestions />} />
           <Route path="tellus" element={< Tellus />} />
           <Route path="chat" element={< Chat />} />
+          <Route path="questionsdisplay" element={< QuestionsDisplay />} />
+
         </Route>
       </Routes>
     </div>
