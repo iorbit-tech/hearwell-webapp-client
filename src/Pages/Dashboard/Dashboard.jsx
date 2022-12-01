@@ -21,6 +21,9 @@ import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import MailIcon from "@mui/icons-material/Mail";
 import ArticleIcon from "@mui/icons-material/Article";
 import { ChatBubbleOutlineOutlined } from "@mui/icons-material";
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import AddCommentIcon from '@mui/icons-material/AddComment';
+import MoreIcon from '@mui/icons-material/More';
 
 const drawerWidth = 240;
 
@@ -94,19 +97,24 @@ export default function DashBoard() {
       nav: "form",
     },
     {
-      text: "View Qns",
-      icon: <ArticleIcon />,
+      text: "Add Qns",
+      icon: <AddCommentIcon />,
       nav: "addquestions",
     },
     {
       text: "Tellus More",
-      icon: <ArticleIcon />,
+      icon: <MoreIcon />,
       nav: "tellus",
     },
     {
       text: "Chat",
       icon: <ChatBubbleOutlineOutlined />,
       nav: "chat",
+    },
+    {
+      text: "All Questions",
+      icon: <QuestionAnswerIcon />,
+      nav: "allquestions",
     },
   ];
   const [open, setOpen] = React.useState(

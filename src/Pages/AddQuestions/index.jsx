@@ -1,9 +1,10 @@
+import { useParams } from 'react-router';
 import { Alert, AlertTitle, Button, FormControl, InputLabel, MenuItem, Select, TextareaAutosize, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
-import React, { useState } from "react";
-import { Form } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import "../LoginScreen/Index.scss";
+import { getApi } from '../../Webservice/Webservice';
 
 const AddQuestions = () => {
     const [page, setPage] = useState('tellus');
@@ -11,7 +12,30 @@ const AddQuestions = () => {
     const [answerType, setAnsType] = useState('checkbox');
     const baseUrl = 'http://178.128.165.237:8000/';
     const [success, setSuccess] = useState(0);
-    console.log(success, 'success')
+    const [questionsData, setQuestionsData] = useState();
+    const { item } = useParams();
+    console.log(questionsData, 'questionsData');
+    useEffect(() => {
+        if (item !== undefined) {
+            console.log('getQuestions')
+            getQuestions();
+        }
+    }, [item]);
+
+    async function getQuestions() {
+        await getApi("api/questions/qid/" + item)
+            .then(res => {
+                console.log(res, "responseee");
+                setQuestionsData(res.data);
+                setPage(res.data.page);
+                setOrder(res.data.order);
+                setAnsType(res.data.answerType);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
 
     const handlePageChange = (value) => {
         console.log(value.target.value, 'handlePageChange');
@@ -112,6 +136,7 @@ const AddQuestions = () => {
                         <p style={{ float: 'left', marginTop: 25, width: 100 }}>Question:</p>
                         <FormControl style={{ float: 'right', marginLeft: 30 }} sx={{ m: 1, width: '25ch', }} variant="outlined">
                             <TextareaAutosize
+                                defaultValue={questionsData ? questionsData.question : ''}
                                 aria-label=""
                                 placeholder=""
                                 style={{ width: 210, height: 50, borderRadius: 5, backgroundColor: '#00000000', }}
@@ -134,6 +159,13 @@ const AddQuestions = () => {
                                 <MenuItem value={1}>1</MenuItem>
                                 <MenuItem value={2}>2</MenuItem>
                                 <MenuItem value={3}>3</MenuItem>
+                                <MenuItem value={4}>4</MenuItem>
+                                <MenuItem value={5}>5</MenuItem>
+                                <MenuItem value={6}>6</MenuItem>
+                                <MenuItem value={7}>7</MenuItem>
+                                <MenuItem value={8}>8</MenuItem>
+                                <MenuItem value={9}>9</MenuItem>
+                                <MenuItem value={10}>10</MenuItem>
                             </Select>
                         </FormControl>
                     </div>
@@ -196,7 +228,7 @@ const AddQuestions = () => {
                     }
                     <div style={{ float: 'right' }}>
                         <Button style={{ backgroundColor: '#9E7BF9', color: '#fff', fontWeight: '600', }} type="submit" variant="text">
-                            <span>Save</span>
+                            {questionsData == undefined ? <span>Save</span> : <span>Update</span>}
                             {/* <span>Update</span> */}
                         </Button>
                         <Button style={{ backgroundColor: '#9E7BF9', color: '#fff', fontWeight: '600', marginLeft: 20 }} variant="text">Delete</Button>
