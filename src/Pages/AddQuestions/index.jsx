@@ -14,7 +14,7 @@ const AddQuestions = () => {
     const [success, setSuccess] = useState(0);
     const [questionsData, setQuestionsData] = useState();
     const { item } = useParams();
-
+    console.log(questionsData, 'item')
     useEffect(() => {
         if (item !== undefined) {
             getQuestions();
@@ -59,9 +59,10 @@ const AddQuestions = () => {
         const { name, value } = e.target;
     };
 
-    const callAxios = (questionsData) => {
+    const callAxios = (questionData) => {
+        console.log('callAxios')
         axios
-            .post(baseUrl + "api/questions", questionsData, {
+            .post(baseUrl + "api/questions", questionData, {
                 headers: {
                     Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjYzNmY0ZTdiYWFkYzBjMWVhY2ViMjcxMSIsInVzZXJOYW1lIjoicmFodWwiLCJwYXNzd29yZCI6IiQyYiQxMCRqSjFwbDNvOExndFUxTHl3ME03R21lMlpZMWZsSThTMzlyR0toeURMakdjN3M1a1pmQkw2NiIsInVzZXJUeXBlIjoidXNlciIsInN0YXR1cyI6dHJ1ZSwiZmlyc3ROYW1lIjoiUmFodWwiLCJsYXN0TmFtZSI6IktpbmciLCJkb2IiOiIxNC0xMi0xOTk1IiwiZ2VuZGVyIjoibWFsZSIsIm1hcml0YWxTdGF0dXMiOiJzaW5nbGUiLCJhZGRyZXNzMSI6ImFkcmVzcyBsaW5lIDEiLCJhZGRyZXNzMiI6ImFkcmVzcyBsaW5lIDIiLCJjaXR5IjoiVHJpdmFuZHJ1bSIsImNvdW50cnkiOiJJbmRpYSIsInppcCI6IjY5NTU3MSIsImVtYWlsIjoicmFodWxAZ2FtYWlsLmNvbSIsInBob25lIjoiMzQ1NDMzNDU1NDM0IiwidXNlcklkIjoiOGU2NTQ3YjMtNDNkOC00MzVlLWFlNzAtNGI4ZmFjZmQ4MzhkIiwiY3JlYXRlZEF0IjoiMjAyMi0xMS0xMlQwNzo0Mjo1MS4zODJaIiwidXBkYXRlZEF0IjoiMjAyMi0xMS0xNFQxMDozNzowMy4wODBaIiwiX192IjowfSwiaWF0IjoxNjY5MTAyOTY2fQ.zNKdeEbuxC7vZZRDZZdVaUvWqXGt_wxtHxW-PYQqaUA'
                 }
@@ -75,14 +76,40 @@ const AddQuestions = () => {
                 );
 
             })
+            .catch((err) => {
+                console.error('error', err.request.response.message); setSuccess(-1); setTimeout(
+                    () => setSuccess(0),
+                    5000
+                );
+            });
+    };
+
+    const callUpdateAxios = (questionData) => {
+        console.log('callUpdateAxios', questionsData);
+        axios
+            .put(baseUrl + "api/questions/" + questionsData.questionId, questionData, {
+                headers: {
+                    Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjYzNmY0ZTdiYWFkYzBjMWVhY2ViMjcxMSIsInVzZXJOYW1lIjoicmFodWwiLCJwYXNzd29yZCI6IiQyYiQxMCRqSjFwbDNvOExndFUxTHl3ME03R21lMlpZMWZsSThTMzlyR0toeURMakdjN3M1a1pmQkw2NiIsInVzZXJUeXBlIjoidXNlciIsInN0YXR1cyI6dHJ1ZSwiZmlyc3ROYW1lIjoiUmFodWwiLCJsYXN0TmFtZSI6IktpbmciLCJkb2IiOiIxNC0xMi0xOTk1IiwiZ2VuZGVyIjoibWFsZSIsIm1hcml0YWxTdGF0dXMiOiJzaW5nbGUiLCJhZGRyZXNzMSI6ImFkcmVzcyBsaW5lIDEiLCJhZGRyZXNzMiI6ImFkcmVzcyBsaW5lIDIiLCJjaXR5IjoiVHJpdmFuZHJ1bSIsImNvdW50cnkiOiJJbmRpYSIsInppcCI6IjY5NTU3MSIsImVtYWlsIjoicmFodWxAZ2FtYWlsLmNvbSIsInBob25lIjoiMzQ1NDMzNDU1NDM0IiwidXNlcklkIjoiOGU2NTQ3YjMtNDNkOC00MzVlLWFlNzAtNGI4ZmFjZmQ4MzhkIiwiY3JlYXRlZEF0IjoiMjAyMi0xMS0xMlQwNzo0Mjo1MS4zODJaIiwidXBkYXRlZEF0IjoiMjAyMi0xMS0xNFQxMDozNzowMy4wODBaIiwiX192IjowfSwiaWF0IjoxNjY5MTAyOTY2fQ.zNKdeEbuxC7vZZRDZZdVaUvWqXGt_wxtHxW-PYQqaUA'
+                }
+            })
+            .then((res) => {
+                console.log(res, "responseee");
+                setSuccess(2);
+                setTimeout(
+                    () => setSuccess(0),
+                    5000
+                );
+
+            })
             .catch((err) => console.error(err, questionsData));
     };
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
         const data = new FormData(event.currentTarget);
-        const questionsData = {
+        const questionData = {
             question: data.get("question"),
             // answer1: data.get("answer1"),
             // answer2: data.get("answer2"),
@@ -93,8 +120,12 @@ const AddQuestions = () => {
             answerType: answerType,
             createdBy: 'Doctor'
         };
-        console.log(questionsData, 'questionsData');
-        callAxios(questionsData);
+        console.log(questionData, 'questionsData');
+        if (item == undefined) {
+            callAxios(questionData);
+        } else {
+            callUpdateAxios(questionData);
+        }
     };
 
 
@@ -228,6 +259,20 @@ const AddQuestions = () => {
                     <Alert className="alertbox" severity="success">
                         <AlertTitle>Success</AlertTitle>
                         <strong>Question created successfully!</strong>
+                    </Alert>
+                )
+                }
+                {success == 2 && (
+                    <Alert className="alertbox" severity="success">
+                        <AlertTitle>Success</AlertTitle>
+                        <strong>Question updated successfully!</strong>
+                    </Alert>
+                )
+                }
+                {success == -1 && (
+                    <Alert className="alertbox" severity="error">
+                        <AlertTitle>Error</AlertTitle>
+                        <strong><span style={{ fontWeight: 'bolder' }}>Question order</span> already exists!</strong>
                     </Alert>
                 )
                 }
