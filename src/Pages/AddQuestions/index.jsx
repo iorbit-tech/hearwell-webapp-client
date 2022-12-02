@@ -14,11 +14,16 @@ const AddQuestions = () => {
     const [success, setSuccess] = useState(0);
     const [questionsData, setQuestionsData] = useState();
     const { item } = useParams();
-    console.log(questionsData, 'questionsData');
+
     useEffect(() => {
         if (item !== undefined) {
-            console.log('getQuestions')
             getQuestions();
+        }
+        else {
+            setPage('tellus');
+            setOrder(1);
+            setAnsType('checkbox');
+            setQuestionsData('');
         }
     }, [item]);
 
@@ -38,34 +43,20 @@ const AddQuestions = () => {
 
 
     const handlePageChange = (value) => {
-        console.log(value.target.value, 'handlePageChange');
         setPage(value.target.value);
     }
 
     const handleAnsTypeChange = (value) => {
-        console.log(value.target.value, 'handleAnsTypeChange');
         setAnsType(value.target.value);
 
     }
 
     const handleOrderChange = (value) => {
-        console.log(value.target.value, 'handleOrderChange');
         setOrder(value.target.value);
     }
 
-    // const questions = () => {
-
-    //     console.log({ page, orderno, ansType, questionsData, }, 'questions')
-    // };
-
     const onChangeHanddle = (e) => {
-        // if (!validEmail.test(e.target.value)) {
-        //   setError("Enter valid email");
-        // } else {
-        //   setError("");
-        // }
         const { name, value } = e.target;
-        console.log(name, 'name');
     };
 
     const callAxios = (questionsData) => {
@@ -228,8 +219,7 @@ const AddQuestions = () => {
                     }
                     <div style={{ float: 'right' }}>
                         <Button style={{ backgroundColor: '#9E7BF9', color: '#fff', fontWeight: '600', }} type="submit" variant="text">
-                            {questionsData == undefined ? <span>Save</span> : <span>Update</span>}
-                            {/* <span>Update</span> */}
+                            {questionsData == (undefined || '') ? <span>Save</span> : <span>Update</span>}
                         </Button>
                         <Button style={{ backgroundColor: '#9E7BF9', color: '#fff', fontWeight: '600', marginLeft: 20 }} variant="text">Delete</Button>
                     </div>
