@@ -76,26 +76,7 @@ export default function DashBoard() {
   const theme = useTheme();
   const navigate = useNavigate();
   const sideBarData = [
-    {
-      text: "Create",
-      icon: <MailIcon />,
-      nav: "form",
-    },
-    {
-      text: "Logstics",
-      icon: <ArticleIcon />,
-      nav: "logistics",
-    },
-    {
-      text: "Dashbord",
-      icon: <ArticleIcon />,
-      nav: "form",
-    },
-    {
-      text: "Login",
-      icon: <ArticleIcon />,
-      nav: "form",
-    },
+   
     {
       text: "Add Qns",
       icon: <AddCommentIcon />,
