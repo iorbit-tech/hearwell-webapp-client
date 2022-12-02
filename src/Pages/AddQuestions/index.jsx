@@ -10,11 +10,11 @@ const AddQuestions = () => {
     const [page, setPage] = useState('tellus');
     const [order, setOrder] = useState(1);
     const [answerType, setAnsType] = useState('checkbox');
+    const [option1Val, setOption1Val] = useState('');
     const baseUrl = 'http://178.128.165.237:8000/';
     const [success, setSuccess] = useState(0);
     const [questionsData, setQuestionsData] = useState();
     const { item } = useParams();
-    console.log(questionsData, 'item')
     useEffect(() => {
         if (item !== undefined) {
             getQuestions();
@@ -35,6 +35,7 @@ const AddQuestions = () => {
                 setPage(res.data.page);
                 setOrder(res.data.order);
                 setAnsType(res.data.answerType);
+                setOption1Val(res.data.options[0]);
             })
             .catch(error => {
                 console.log(error);
@@ -111,10 +112,11 @@ const AddQuestions = () => {
         const data = new FormData(event.currentTarget);
         const questionData = {
             question: data.get("question"),
-            // answer1: data.get("answer1"),
-            // answer2: data.get("answer2"),
-            // answer3: data.get("answer3"),
-            // answer4: data.get("answer4"),
+            options: [
+                data.get("answer1"),
+                data.get("answer2"),
+                data.get("answer3"),
+                data.get("answer4"),],
             page: page,
             order: order,
             answerType: answerType,
@@ -214,35 +216,46 @@ const AddQuestions = () => {
                             <div style={{ width: 100, float: 'right' }}>
                                 <FormControl style={{ float: 'right', marginLeft: 30 }} sx={{ m: 1, width: '25ch', }} variant="outlined">
                                     <TextField
+                                        value={option1Val}
                                         id="outlined-required"
+                                        variant="outlined"
                                         label=""
                                         margin="normal"
-                                        onChange={(e) => onChangeHanddle(e)}
-                                        name=''
+                                        onChange={(newValue) => setOption1Val(newValue.target.value)}
+                                        name='answer1'
                                     />
                                 </FormControl>
                                 <FormControl style={{ float: 'right', marginLeft: 30 }} sx={{ m: 1, width: '25ch', }} variant="outlined">
                                     <TextField
+                                        defaultValue={questionsData ? questionsData.options[1] : ''}
                                         id="outlined-required"
+                                        variant="outlined"
                                         label=""
                                         margin="normal"
                                         onChange={(e) => onChangeHanddle(e)}
+                                        name='answer2'
                                     />
                                 </FormControl>
                                 <FormControl style={{ float: 'right', marginLeft: 30 }} sx={{ m: 1, width: '25ch', }} variant="outlined">
                                     <TextField
+                                        defaultValue={questionsData ? questionsData.options[2] : ''}
                                         id="outlined-required"
+                                        variant="outlined"
                                         label=""
                                         margin="normal"
                                         onChange={(e) => onChangeHanddle(e)}
+                                        name='answer3'
                                     />
                                 </FormControl>
                                 <FormControl style={{ float: 'right', marginLeft: 30 }} sx={{ m: 1, width: '25ch', }} variant="outlined">
                                     <TextField
+                                        defaultValue={questionsData ? questionsData.options[3] : ''}
                                         id="outlined-required"
+                                        variant="outlined"
                                         label=""
                                         margin="normal"
                                         onChange={(e) => onChangeHanddle(e)}
+                                        name='answer4'
                                     />
                                 </FormControl>
                             </div>
