@@ -1,18 +1,15 @@
 import { useParams } from 'react-router';
 import { Alert, AlertTitle, Button, FormControl, InputLabel, MenuItem, Select, TextareaAutosize, TextField } from "@mui/material";
 import { Box } from "@mui/system";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "../LoginScreen/Index.scss";
-import { getApi } from '../../Webservice/Webservice';
+import { getApi, postApiCall, updateApi } from '../../Webservice/Webservice';
 
 const AddQuestions = () => {
     const [page, setPage] = useState('tellus');
     const [order, setOrder] = useState(1);
     const [answerType, setAnsType] = useState('checkbox');
-    // const [option1Val, setOption1Val] = useState('');
     const [optionVal, setOptionVal] = useState({ opt1: '', opt2: '', opt3: '', opt4: '' });
-    const baseUrl = 'http://178.128.165.237:8000/';
     const [success, setSuccess] = useState(0);
     const [questionsData, setQuestionsData] = useState();
     const { item } = useParams();
@@ -27,6 +24,7 @@ const AddQuestions = () => {
             setOrder(1);
             setAnsType('checkbox');
             setQuestionsData('');
+            setOptionVal({ opt1: '', opt2: '', opt3: '', opt4: '' });
         }
     }, [item]);
 
@@ -38,7 +36,6 @@ const AddQuestions = () => {
                 setPage(res.data.page);
                 setOrder(res.data.order);
                 setAnsType(res.data.answerType);
-                // setOptionVal(res.data.options[0]);
                 console.log(res.data, "responseee");
                 setOptionVal({ opt1: res.data.options[0], opt2: res.data.options[1], opt3: res.data.options[2], opt4: res.data.options[3] });
             })
@@ -65,17 +62,32 @@ const AddQuestions = () => {
         const { name, value } = e.target;
     };
 
-    const callAxios = (questionData) => {
-        console.log('callAxios')
-        axios
-            .post(baseUrl + "api/questions", questionData, {
-                headers: {
-                    Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjYzNmY0ZTdiYWFkYzBjMWVhY2ViMjcxMSIsInVzZXJOYW1lIjoicmFodWwiLCJwYXNzd29yZCI6IiQyYiQxMCRqSjFwbDNvOExndFUxTHl3ME03R21lMlpZMWZsSThTMzlyR0toeURMakdjN3M1a1pmQkw2NiIsInVzZXJUeXBlIjoidXNlciIsInN0YXR1cyI6dHJ1ZSwiZmlyc3ROYW1lIjoiUmFodWwiLCJsYXN0TmFtZSI6IktpbmciLCJkb2IiOiIxNC0xMi0xOTk1IiwiZ2VuZGVyIjoibWFsZSIsIm1hcml0YWxTdGF0dXMiOiJzaW5nbGUiLCJhZGRyZXNzMSI6ImFkcmVzcyBsaW5lIDEiLCJhZGRyZXNzMiI6ImFkcmVzcyBsaW5lIDIiLCJjaXR5IjoiVHJpdmFuZHJ1bSIsImNvdW50cnkiOiJJbmRpYSIsInppcCI6IjY5NTU3MSIsImVtYWlsIjoicmFodWxAZ2FtYWlsLmNvbSIsInBob25lIjoiMzQ1NDMzNDU1NDM0IiwidXNlcklkIjoiOGU2NTQ3YjMtNDNkOC00MzVlLWFlNzAtNGI4ZmFjZmQ4MzhkIiwiY3JlYXRlZEF0IjoiMjAyMi0xMS0xMlQwNzo0Mjo1MS4zODJaIiwidXBkYXRlZEF0IjoiMjAyMi0xMS0xNFQxMDozNzowMy4wODBaIiwiX192IjowfSwiaWF0IjoxNjY5MTAyOTY2fQ.zNKdeEbuxC7vZZRDZZdVaUvWqXGt_wxtHxW-PYQqaUA'
-                }
+    async function callAxios(questionData) {
+        console.log('newpostApiCall')
+        await postApiCall("api/questions", questionData)
+            .then((res) => {
+                setSuccess(1);
+                setTimeout(
+                    () => setSuccess(0),
+                    5000
+                );
             })
+            .catch((err) => {
+                console.error('error', err);
+                setSuccess(-1);
+                setTimeout(
+                    () => setSuccess(0),
+                    5000
+                );
+            });
+    }
+
+    async function callUpdateAxios(questionData) {
+        console.log('newupdateApi')
+        await updateApi("api/questions/" + questionsData.questionId, questionData)
             .then((res) => {
                 console.log(res, "responseee");
-                setSuccess(1);
+                setSuccess(2);
                 setTimeout(
                     () => setSuccess(0),
                     5000
@@ -88,28 +100,7 @@ const AddQuestions = () => {
                     5000
                 );
             });
-    };
-
-    const callUpdateAxios = (questionData) => {
-        console.log('callUpdateAxios', questionsData);
-        axios
-            .put(baseUrl + "api/questions/" + questionsData.questionId, questionData, {
-                headers: {
-                    Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjYzNmY0ZTdiYWFkYzBjMWVhY2ViMjcxMSIsInVzZXJOYW1lIjoicmFodWwiLCJwYXNzd29yZCI6IiQyYiQxMCRqSjFwbDNvOExndFUxTHl3ME03R21lMlpZMWZsSThTMzlyR0toeURMakdjN3M1a1pmQkw2NiIsInVzZXJUeXBlIjoidXNlciIsInN0YXR1cyI6dHJ1ZSwiZmlyc3ROYW1lIjoiUmFodWwiLCJsYXN0TmFtZSI6IktpbmciLCJkb2IiOiIxNC0xMi0xOTk1IiwiZ2VuZGVyIjoibWFsZSIsIm1hcml0YWxTdGF0dXMiOiJzaW5nbGUiLCJhZGRyZXNzMSI6ImFkcmVzcyBsaW5lIDEiLCJhZGRyZXNzMiI6ImFkcmVzcyBsaW5lIDIiLCJjaXR5IjoiVHJpdmFuZHJ1bSIsImNvdW50cnkiOiJJbmRpYSIsInppcCI6IjY5NTU3MSIsImVtYWlsIjoicmFodWxAZ2FtYWlsLmNvbSIsInBob25lIjoiMzQ1NDMzNDU1NDM0IiwidXNlcklkIjoiOGU2NTQ3YjMtNDNkOC00MzVlLWFlNzAtNGI4ZmFjZmQ4MzhkIiwiY3JlYXRlZEF0IjoiMjAyMi0xMS0xMlQwNzo0Mjo1MS4zODJaIiwidXBkYXRlZEF0IjoiMjAyMi0xMS0xNFQxMDozNzowMy4wODBaIiwiX192IjowfSwiaWF0IjoxNjY5MTAyOTY2fQ.zNKdeEbuxC7vZZRDZZdVaUvWqXGt_wxtHxW-PYQqaUA'
-                }
-            })
-            .then((res) => {
-                console.log(res, "responseee");
-                setSuccess(2);
-                setTimeout(
-                    () => setSuccess(0),
-                    5000
-                );
-
-            })
-            .catch((err) => console.error(err, questionsData));
-    };
-
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -138,7 +129,7 @@ const AddQuestions = () => {
     console.log(optionVal, 'optionVal');
 
     return (
-        <div className="container">
+        <div className="container" style={{ width: '100%', height: '100vh', backgroundColor: '#F3F3F3' }}>
             <div style={{ width: '30%', alignSelf: 'center', marginTop: 20 }}>
                 <Box
                     component="form"
@@ -271,7 +262,6 @@ const AddQuestions = () => {
                         <Button style={{ backgroundColor: '#9E7BF9', color: '#fff', fontWeight: '600', }} type="submit" variant="text">
                             {questionsData == (undefined || '') ? <span>Save</span> : <span>Update</span>}
                         </Button>
-                        <Button style={{ backgroundColor: '#9E7BF9', color: '#fff', fontWeight: '600', marginLeft: 20 }} variant="text">Delete</Button>
                     </div>
                 </Box>
                 {success == 1 && (

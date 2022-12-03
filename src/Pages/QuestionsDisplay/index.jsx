@@ -38,11 +38,11 @@ const QuestionsDisplay = () => {
     }
 
     return (
-        <div className="container">
+        <div className="container" style={{ width: '100%', height: '100%', backgroundColor: '#F3F3F3' }}>
             <div>
-                <Table striped bordered hover className="userTable">
+                <Table striped bordered hover className="userTable" style={{ width: '80%', }}>
                     <thead >
-                        <td style={{ textAlign: 'center', fontSize: 25, fontWeight: 'bold' }} colspan='7'>Tellus</td>
+                        <td style={{ textAlign: 'center', fontSize: 25, fontWeight: 'bold' }} colspan='11'>Tellus</td>
                     </thead>
                     <thead>
                         <tr className="userHeadRow">
@@ -51,7 +51,8 @@ const QuestionsDisplay = () => {
                             <th>Order No</th>
                             <th>Ans Type</th>
                             <th>Question</th>
-                            <th colspan='2'>Actions</th>
+                            <th colspan='4'>Options</th>
+                            <th colspan='2' >Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,9 +65,9 @@ const QuestionsDisplay = () => {
                 </Table>
             </div >
             <div>
-                <Table striped bordered hover className="userTable">
+                <Table striped bordered hover className="userTable" style={{ width: '80%' }}>
                     <thead >
-                        <td style={{ textAlign: 'center', fontSize: 25, fontWeight: 'bold' }} colspan='7'>Hearing Diary</td>
+                        <td style={{ textAlign: 'center', fontSize: 25, fontWeight: 'bold' }} colspan='11'>Hearing Diary</td>
                     </thead>
                     <thead>
                         <tr className="userHeadRow">
@@ -75,7 +76,8 @@ const QuestionsDisplay = () => {
                             <th>Order No</th>
                             <th>Ans Type</th>
                             <th>Question</th>
-                            <th colspan='2'>Actions</th>
+                            <th colspan='4'>Options</th>
+                            <th colspan='2' >Actions</th>
                         </tr>
                     </thead>
                     <tbody>
