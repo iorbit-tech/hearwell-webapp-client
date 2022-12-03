@@ -20,6 +20,10 @@ import { Navigate, Outlet, useNavigate } from "react-router-dom";
 // import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from "@mui/icons-material/Mail";
 import ArticleIcon from "@mui/icons-material/Article";
+import { ChatBubbleOutlineOutlined } from "@mui/icons-material";
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import AddCommentIcon from '@mui/icons-material/AddComment';
+import MoreIcon from '@mui/icons-material/More';
 
 const drawerWidth = 240;
 
@@ -72,25 +76,26 @@ export default function DashBoard() {
   const theme = useTheme();
   const navigate = useNavigate();
   const sideBarData = [
+   
     {
-      text: "Create",
-      icon: <MailIcon />,
-      nav: "form",
+      text: "Add Qns",
+      icon: <AddCommentIcon />,
+      nav: "addquestions",
     },
     {
-      text: "Logstics",
-      icon: <ArticleIcon />,
-      nav: "logistics",
+      text: "Tellus More",
+      icon: <MoreIcon />,
+      nav: "tellus",
     },
     {
-      text: "Dashbord",
-      icon: <ArticleIcon />,
-      nav: "form",
+      text: "Chat",
+      icon: <ChatBubbleOutlineOutlined />,
+      nav: "chat",
     },
     {
-      text: "Login",
-      icon: <ArticleIcon />,
-      nav: "form",
+      text: "All Questions",
+      icon: <QuestionAnswerIcon />,
+      nav: "allquestions",
     },
   ];
   const [open, setOpen] = React.useState(
