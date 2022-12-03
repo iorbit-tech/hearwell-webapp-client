@@ -10,11 +10,14 @@ const AddQuestions = () => {
     const [page, setPage] = useState('tellus');
     const [order, setOrder] = useState(1);
     const [answerType, setAnsType] = useState('checkbox');
-    const [option1Val, setOption1Val] = useState('');
+    // const [option1Val, setOption1Val] = useState('');
+    const [optionVal, setOptionVal] = useState({ opt1: '', opt2: '', opt3: '', opt4: '' });
     const baseUrl = 'http://178.128.165.237:8000/';
     const [success, setSuccess] = useState(0);
     const [questionsData, setQuestionsData] = useState();
     const { item } = useParams();
+
+
     useEffect(() => {
         if (item !== undefined) {
             getQuestions();
@@ -30,12 +33,14 @@ const AddQuestions = () => {
     async function getQuestions() {
         await getApi("api/questions/qid/" + item)
             .then(res => {
-                console.log(res, "responseee");
+
                 setQuestionsData(res.data);
                 setPage(res.data.page);
                 setOrder(res.data.order);
                 setAnsType(res.data.answerType);
-                setOption1Val(res.data.options[0]);
+                // setOptionVal(res.data.options[0]);
+                console.log(res.data, "responseee");
+                setOptionVal({ opt1: res.data.options[0], opt2: res.data.options[1], opt3: res.data.options[2], opt4: res.data.options[3] });
             })
             .catch(error => {
                 console.log(error);
@@ -130,6 +135,7 @@ const AddQuestions = () => {
         }
     };
 
+    console.log(optionVal, 'optionVal');
 
     return (
         <div className="container">
@@ -216,45 +222,45 @@ const AddQuestions = () => {
                             <div style={{ width: 100, float: 'right' }}>
                                 <FormControl style={{ float: 'right', marginLeft: 30 }} sx={{ m: 1, width: '25ch', }} variant="outlined">
                                     <TextField
-                                        value={option1Val}
+                                        value={optionVal.opt1}
                                         id="outlined-required"
                                         variant="outlined"
                                         label=""
                                         margin="normal"
-                                        onChange={(newValue) => setOption1Val(newValue.target.value)}
+                                        onChange={(newValue) => setOptionVal(optionVal.opt1 = newValue)}
                                         name='answer1'
                                     />
                                 </FormControl>
                                 <FormControl style={{ float: 'right', marginLeft: 30 }} sx={{ m: 1, width: '25ch', }} variant="outlined">
                                     <TextField
-                                        defaultValue={questionsData ? questionsData.options[1] : ''}
+                                        value={optionVal.opt2}
                                         id="outlined-required"
                                         variant="outlined"
                                         label=""
                                         margin="normal"
-                                        onChange={(e) => onChangeHanddle(e)}
+                                        onChange={(newValue) => setOptionVal(optionVal.opt2 = newValue)}
                                         name='answer2'
                                     />
                                 </FormControl>
                                 <FormControl style={{ float: 'right', marginLeft: 30 }} sx={{ m: 1, width: '25ch', }} variant="outlined">
                                     <TextField
-                                        defaultValue={questionsData ? questionsData.options[2] : ''}
+                                        value={optionVal.opt3}
                                         id="outlined-required"
                                         variant="outlined"
                                         label=""
                                         margin="normal"
-                                        onChange={(e) => onChangeHanddle(e)}
+                                        onChange={(newValue) => setOptionVal(optionVal.opt3 = newValue)}
                                         name='answer3'
                                     />
                                 </FormControl>
                                 <FormControl style={{ float: 'right', marginLeft: 30 }} sx={{ m: 1, width: '25ch', }} variant="outlined">
                                     <TextField
-                                        defaultValue={questionsData ? questionsData.options[3] : ''}
+                                        value={optionVal.opt4}
                                         id="outlined-required"
                                         variant="outlined"
                                         label=""
                                         margin="normal"
-                                        onChange={(e) => onChangeHanddle(e)}
+                                        onChange={(newValue) => setOptionVal(optionVal.opt4 = newValue)}
                                         name='answer4'
                                     />
                                 </FormControl>
