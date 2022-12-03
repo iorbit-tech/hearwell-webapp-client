@@ -16,7 +16,7 @@ const App = () => {
   const nav = useNavigate();
   useEffect(() => {
     if (authToken) {
-      nav("/home");
+      nav("/addquestions");
     } else {
       nav("/login");
     }
@@ -26,7 +26,6 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<LoginScreen />} />
         <Route path="/signup" element={<RegFormPage />} />
-
         <Route path="/" element={<DashBoard />}>
           <Route path="/home" element={<Home />} />
           <Route path="/form" element={<RegForm />} />
