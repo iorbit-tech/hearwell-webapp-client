@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const baseUrl = 'http://178.128.165.237:8000/';
+export const baseUrl = 'http://178.128.165.237:8000';
 
 export const postApi = (url, data) => {
   axios

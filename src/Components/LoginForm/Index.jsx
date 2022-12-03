@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { baseUrl, postApi } from "../../Webservice/Webservice";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -36,6 +37,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Login() {
+  const nav = useNavigate()
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -47,12 +49,14 @@ export default function Login() {
 
     axios.post(baseUrl + "/api/user/login", newData).then((resp) => {
       localStorage.setItem("authToken", resp.data.token);
-      localStorage.setItem("userData", resp.data.data);
+      localStorage.setItem("userData", JSON.stringify(resp.data.data));
+
       console.log(
-        resp.data.message,
-        localStorage.getItem("authToken")
+        resp.data.token,
+        JSON.parse(localStorage.getItem("userData"))
       );
-    });
+      if (resp.data.token) nav("/home")
+    }).error((err)=>console.log(err))
     // postApi("/api/user/login", newData).then((resp) => console.log(resp));
   };
 
