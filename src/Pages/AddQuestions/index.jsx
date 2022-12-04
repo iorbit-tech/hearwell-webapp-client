@@ -22,6 +22,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "../LoginScreen/Index.scss";
 import { getApi } from "../../Webservice/Webservice";
+import { authToken } from "../../utils/authChecker";
 const theme = createTheme();
 const AddQuestions = () => {
   const questionInit = {
@@ -75,14 +76,6 @@ const AddQuestions = () => {
   const handleAnsTypeChange = (value) => {
     setAnsType(value.target.value);
   };
-
-  const handleOrderChange = (value) => {
-    setOrder(value.target.value);
-  };
-
-  const onChangeHanddle = (e) => {
-    const { name, value } = e.target;
-  };
   const onOptionChange = (e) => {
     const { name, value } = e.target;
     if (value.includes(",")) {
@@ -93,20 +86,15 @@ const AddQuestions = () => {
 
   const onChangeHandle = (e) => {
     const { name, value } = e.target;
-    // const newData = questionData
-    // newData.name = value
-
     setQuestionData({ ...questionData, [name]: value });
   };
 
   const callAxios = (questionData) => {
-    console.log("callAxios");
+    console.log(questionData, "from call axios");
     axios
-      .post(baseUrl + "api/questions", questionData, {
+      .post(baseUrl + "/api/questions", questionData, {
         headers: {
-          Authorization:
-            "Bearer " +
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjYzNmY0ZTdiYWFkYzBjMWVhY2ViMjcxMSIsInVzZXJOYW1lIjoicmFodWwiLCJwYXNzd29yZCI6IiQyYiQxMCRqSjFwbDNvOExndFUxTHl3ME03R21lMlpZMWZsSThTMzlyR0toeURMakdjN3M1a1pmQkw2NiIsInVzZXJUeXBlIjoidXNlciIsInN0YXR1cyI6dHJ1ZSwiZmlyc3ROYW1lIjoiUmFodWwiLCJsYXN0TmFtZSI6IktpbmciLCJkb2IiOiIxNC0xMi0xOTk1IiwiZ2VuZGVyIjoibWFsZSIsIm1hcml0YWxTdGF0dXMiOiJzaW5nbGUiLCJhZGRyZXNzMSI6ImFkcmVzcyBsaW5lIDEiLCJhZGRyZXNzMiI6ImFkcmVzcyBsaW5lIDIiLCJjaXR5IjoiVHJpdmFuZHJ1bSIsImNvdW50cnkiOiJJbmRpYSIsInppcCI6IjY5NTU3MSIsImVtYWlsIjoicmFodWxAZ2FtYWlsLmNvbSIsInBob25lIjoiMzQ1NDMzNDU1NDM0IiwidXNlcklkIjoiOGU2NTQ3YjMtNDNkOC00MzVlLWFlNzAtNGI4ZmFjZmQ4MzhkIiwiY3JlYXRlZEF0IjoiMjAyMi0xMS0xMlQwNzo0Mjo1MS4zODJaIiwidXBkYXRlZEF0IjoiMjAyMi0xMS0xNFQxMDozNzowMy4wODBaIiwiX192IjowfSwiaWF0IjoxNjY5MTAyOTY2fQ.zNKdeEbuxC7vZZRDZZdVaUvWqXGt_wxtHxW-PYQqaUA",
+          Authorization: "Bearer " + authToken,
         },
       })
       .then((res) => {
@@ -145,15 +133,13 @@ const AddQuestions = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    //const data = new FormData(event.currentTarget);
     const data = questionData;
     data.answerType = answerType;
     data.page = page;
     data.createdBy = "Doctor";
     options && (data.options = options);
 
-    console.log(data);
+    //console.log(data);
 
     // const questionData = {
     //   question: data.get("question"),
@@ -166,9 +152,9 @@ const AddQuestions = () => {
     //   answerType: answerType,
     //   createdBy: "Doctor",
     // };
-   // console.log(questionData, "questionsData");
+    // console.log(questionData, "questionsData");
     // if (item == undefined) {
-      callAxios(data);
+    callAxios(data);
     // } else {
     //   callUpdateAxios(questionData);
     // }
@@ -196,21 +182,7 @@ const AddQuestions = () => {
               >
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={12}>
-                    {/* <TextField
-                    autoComplete="given-name"
-                    name="firstName"
-                    required
-                    fullWidth
-                    id="firstName"
-                    label="First Name"
-                    autoFocus
-                    error={false}
-                    onChange={(e) => onChangeHanddle(e)}
-                    // helperText={error}
-                  /> */}
-                    <FormControl
-                    // fullWidth
-                    >
+                    <FormControl>
                       <InputLabel id="demo-simple-select-label">
                         page
                       </InputLabel>
@@ -294,7 +266,7 @@ const AddQuestions = () => {
                           options.map((item, index) => {
                             return (
                               item && (
-                                <Typography>
+                                <Typography key={index}>
                                   {index + 1} - {item}
                                 </Typography>
                               )
