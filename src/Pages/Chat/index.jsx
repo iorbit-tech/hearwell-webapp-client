@@ -18,14 +18,14 @@ const Chat = ({ props }) => {
     }
 
     return (
-        <div className="container">
+        <div style={{ width: '100%', height: '100%', backgroundColor: '#0000' }} className="container">
             <Table striped bordered hover className="userTable">
                 <thead>
                     <tr className="userHeadRow" >
                         <th>ID</th>
                         <th>Date</th>
                         <th>User</th>
-                        <th></th>
+                        <th colspan='2'>Actions</th>
                     </tr>
                 </thead>
                 <tbody>

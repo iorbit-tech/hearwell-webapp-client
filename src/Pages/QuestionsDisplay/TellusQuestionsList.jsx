@@ -7,7 +7,7 @@ const TellusQuestionsList = ({ item }) => {
 
     async function deleteQuestion(questionId) {
         console.log(questionId, 'questionId');
-        await deleteApi("api/questions/questionId")
+        await deleteApi("/api/questions/questionId")
             .then(res => {
                 console.log(res, "responseee");
             })
