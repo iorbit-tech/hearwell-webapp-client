@@ -35,6 +35,7 @@ const AddQuestions = () => {
   };
   const [questionData, setQuestionData] = useState(questionInit);
   const [options, setOptions] = useState([]);
+  const [optionText, setOptionText] = useState([]);
 
   const [page, setPage] = useState("tellus");
   const [order, setOrder] = useState(1);
@@ -44,7 +45,9 @@ const AddQuestions = () => {
   const [questionsData, setQuestionsData] = useState();
   const { item } = useParams();
   console.log(questionsData, "item");
+
   useEffect(() => {
+    console.log("item from use", item);
     if (item !== undefined) {
       getQuestions();
     } else {
@@ -56,13 +59,15 @@ const AddQuestions = () => {
   }, [item]);
 
   async function getQuestions() {
-    await getApi("api/questions/qid/" + item)
+    await getApi("/api/questions/qid/" + item)
       .then((res) => {
         console.log(res, "responseee");
-        setQuestionsData(res.data);
+        setQuestionData(res.data);
         setPage(res.data.page);
         setOrder(res.data.order);
         setAnsType(res.data.answerType);
+        setOptions(res.data.options);
+        setOptionText(res.data.options.join(","));
       })
       .catch((error) => {
         console.log(error);
@@ -81,6 +86,7 @@ const AddQuestions = () => {
     if (value.includes(",")) {
       const opt = value.split(",");
       setOptions(opt);
+      setOptionText(value);
     }
   };
 
@@ -255,7 +261,7 @@ const AddQuestions = () => {
                           multiline
                           fullWidth
                           maxRows={4}
-                          //value={value}
+                          value={optionText}
                           onChange={(e) => onOptionChange(e)}
                           name="options"
                           placeholder="Seperate options with comma ' , ' "
@@ -281,13 +287,17 @@ const AddQuestions = () => {
                       type="submit"
                       fullWidth
                       variant="contained"
-                      sx={{ mt: 3, mb: 2 }}
+                      sx={{ mt: 3, mb: 2, backgroundColor: "#9a34e3" }}
                     >
                       Save
                     </Button>
                   </Grid>
                   <Grid item xs={6}>
-                    <Button fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      sx={{ mt: 3, mb: 2, backgroundColor: "#9a34e3" }}
+                    >
                       Cancel
                     </Button>
                   </Grid>

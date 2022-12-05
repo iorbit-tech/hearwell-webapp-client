@@ -20,7 +20,7 @@ import { Navigate, Outlet, useNavigate } from "react-router-dom";
 // import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from "@mui/icons-material/Mail";
 import ArticleIcon from "@mui/icons-material/Article";
-import { ChatBubbleOutlineOutlined } from "@mui/icons-material";
+import { ChatBubbleOutlineOutlined, SupervisedUserCircle } from "@mui/icons-material";
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import AddCommentIcon from '@mui/icons-material/AddComment';
 import MoreIcon from '@mui/icons-material/More';
@@ -79,23 +79,28 @@ export default function DashBoard() {
    
     {
       text: "Add Qns",
-      icon: <AddCommentIcon />,
+      icon: <AddCommentIcon style={{color:"#9a34e3"}} />,
       nav: "addquestions",
     },
     {
       text: "Tellus More",
-      icon: <MoreIcon />,
+      icon: <MoreIcon style={{color:"#9a34e3"}} />,
       nav: "tellus",
     },
     {
       text: "Chat",
-      icon: <ChatBubbleOutlineOutlined />,
+      icon: <ChatBubbleOutlineOutlined style={{color:"#9a34e3"}} />,
       nav: "chat",
     },
     {
       text: "All Questions",
-      icon: <QuestionAnswerIcon />,
+      icon: <QuestionAnswerIcon style={{color:"#9a34e3"}} />,
       nav: "allquestions",
+    },
+    {
+      text: "User Register",
+      icon: <SupervisedUserCircle style={{color:"#9a34e3"}} />,
+      nav: "register",
     },
   ];
   const [open, setOpen] = React.useState(
@@ -118,7 +123,7 @@ export default function DashBoard() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open} style={{backgroundColor:"#9a34e3"}}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -130,7 +135,7 @@ export default function DashBoard() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Title
+            Hearwell
           </Typography>
         </Toolbar>
       </AppBar>
@@ -166,7 +171,7 @@ export default function DashBoard() {
             >
               <ListItemButton>
                 <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.text} />
+                <ListItemText primary={item.text} style={{color:"#9a34e3"}}/>
               </ListItemButton>
             </ListItem>
           ))}
@@ -185,9 +190,9 @@ export default function DashBoard() {
           ))}
         </List> */}
       </Drawer>
-      <Main open={open}>
+      <Main open={open} >
         {/* <DrawerHeader /> */}
-        <div className="route-container">
+        <div className="route-container" >
           <Outlet />
         </div>
       </Main>
