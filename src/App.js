@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import LoginScreen from "./Pages/LoginScreen/Index";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import Home from "./Pages/Home";
 import DashBoard from "./Pages/Dashboard/Dashboard";
 import RegForm from "./Components/RegForms/Form";
@@ -16,6 +16,7 @@ const App = () => {
   const nav = useNavigate();
   useEffect(() => {
     if (authToken) {
+      // <Navigate replace to="/addquestions" />
       nav("/addquestions");
     } else {
       nav("/login");
@@ -25,10 +26,10 @@ const App = () => {
     <div>
       <Routes>
         <Route path="/login" element={<LoginScreen />} />
-        <Route path="/signup" element={<RegFormPage />} />
-        <Route path="/" element={<DashBoard />}>
+        {/* <Route path="/signup" element={<RegFormPage />} /> */}
+        <Route path="/" element={<DashBoard  />}>
           <Route path="/home" element={<Home />} />
-          <Route path="/form" element={<RegForm />} />
+          <Route path="/register" element={<RegForm />} />
           <Route path="/editquestion/:item" element={<AddQuestions />} />
           <Route path="/addquestions" element={<AddQuestions />} />
           <Route path="/tellus" element={<Tellus />} />

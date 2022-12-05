@@ -16,7 +16,7 @@ const QuestionsDisplay = () => {
     }, []);
 
     async function getTellusQuestions() {
-        await getApi("api/questions/page/tellus")
+        await getApi("/api/questions/page/tellus")
             .then(res => {
                 console.log(res, "responseee");
                 setTellusQuestions(res.data);
@@ -27,7 +27,7 @@ const QuestionsDisplay = () => {
     }
 
     async function getHearingQuestions() {
-        await getApi("api/questions/page/hearingdiary")
+        await getApi("/api/questions/page/hearingdiary")
             .then(res => {
                 console.log(res, "getHearingQuestions");
                 setHearingQuestions(res.data);
