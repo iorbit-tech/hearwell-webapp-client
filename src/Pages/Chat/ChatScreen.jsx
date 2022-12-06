@@ -5,8 +5,10 @@ import AttachmentPin from '../../assets/attachment.png';
 import { MessageList } from "react-chat-elements";
 import InputField from "./InputField";
 import SendButton from "./SendButton";
+import { postApi, postApiCall } from "../../Webservice/Webservice";
+import { userData } from "../../utils/authChecker";
 
-const ChatScreen = ({ user, closeChat }) => {
+const ChatScreen = ({ user, closeChat, chatList, getChatList }) => {
     const [messageListArray, setMessageListArray] = useState([]);
     const [currentText, setCurrentText] = useState('');
     const [status, setStatus] = useState('');
@@ -15,14 +17,40 @@ const ChatScreen = ({ user, closeChat }) => {
     const forceUpdate = useForceUpdate()
     let clearRef = () => { }
 
+    console.log(chatList, 'messageListArray');
+
     useEffect(() => {
         if (currentText != '') {
             let Addmtype = inputReferance.current.value || token();
-            Addmtype = 'text'
-            setStatus('read')
+            Addmtype = 'text';
+            setStatus('read');
             setMessageListArray([...messageListArray, randomMessage(Addmtype),])
+            console.log(currentText, 'randomMessage');
+            submitChat(currentText);
+            getChatList();
         }
     }, [currentText]);
+
+    console.log(userData[0].userId, 'userData');
+
+    async function submitChat(currentText) {
+        const submitMessage = {
+            subject: "Expert", message: currentText, sentTime: new Date(),
+            senderId: userData[0].userId, receiverId: "b68a5944-f1f2-4c1c-b82c-e654448da4c8",
+        }
+
+        await postApiCall("/api/chat/", submitMessage)
+            .then(res => {
+                console.log(submitMessage, 'res');
+                // console.log(submitMessage, 'item');
+
+                // setChatList(updatedChatList);
+                // console.log(updatedChatList, 'chatList');
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
 
     const addMessage = (data) => {
         setCurrentText(inputReferance.current.value)
@@ -83,7 +111,8 @@ const ChatScreen = ({ user, closeChat }) => {
                     <MessageList
                         className='message-list'
                         referance={messageListReferance}
-                        dataSource={messageListArray}
+                        // dataSource={messageListArray}
+                        dataSource={chatList}
                         lockable={true}
                         downButton={false}
                         downButtonBadge={10}
