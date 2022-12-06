@@ -36,16 +36,11 @@ const ChatScreen = ({ user, closeChat, chatList, getChatList }) => {
     async function submitChat(currentText) {
         const submitMessage = {
             subject: "Expert", message: currentText, sentTime: new Date(),
-            senderId: userData[0].userId, receiverId: "b68a5944-f1f2-4c1c-b82c-e654448da4c8",
+            senderId: userData[0].userId, receiverId: "b68a5944-f1f2-4c1c-b82c-e654448da4c8", //need to handle Userid
         }
 
         await postApiCall("/api/chat/", submitMessage)
             .then(res => {
-                console.log(submitMessage, 'res');
-                // console.log(submitMessage, 'item');
-
-                // setChatList(updatedChatList);
-                // console.log(updatedChatList, 'chatList');
             })
             .catch(error => {
                 console.log(error);
@@ -75,7 +70,7 @@ const ChatScreen = ({ user, closeChat, chatList, getChatList }) => {
         text: currentText,
         title: 'You',
         focus: true,
-        // date: +new Date(),
+        // date: new Date(),
         dateString: 'now',
         // avatar: `data:image/png;base64,${photo(20)}`,
         titleColor: '#4f81a1',

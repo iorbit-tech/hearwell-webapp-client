@@ -26,11 +26,9 @@ const Chat = ({ props }) => {
     }, []);
 
     const getChatList = async () => {
-        return await getApi("/api/chat/b68a5944-f1f2-4c1c-b82c-e654448da4c8")
+        return await getApi("/api/chat/b68a5944-f1f2-4c1c-b82c-e654448da4c8")  //need to handle Userid
             .then(res => {
                 res.data.map((item, i) => {
-                    console.log(item, 'item');
-                    // setChatList(item.message);
                     updatedChatList[i] = {
                         // item,
                         text: item.message,
