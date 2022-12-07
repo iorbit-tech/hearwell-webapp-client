@@ -119,7 +119,7 @@ export default function RegForm() {
                       id="page-select"
                       //value={page}
                       label="Page"
-                      //onChange={handlePageChange}
+                    //onChange={handlePageChange}
                     >
                       <MenuItem value={"admin"}>Admin</MenuItem>
                       <MenuItem value={"expert"}>Expert</MenuItem>
@@ -138,7 +138,7 @@ export default function RegForm() {
                     autoFocus
                     error={false}
                     onChange={(e) => onChangeHanddle(e)}
-                    // helperText={error}
+                  // helperText={error}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>

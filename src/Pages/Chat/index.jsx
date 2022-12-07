@@ -3,6 +3,7 @@ import "../LoginScreen/Index.scss";
 import { Table } from "@mui/material";
 import ChatScreen from "./ChatScreen";
 import { getApi } from "../../Webservice/Webservice";
+import { userData } from "../../utils/authChecker";
 
 const Chat = ({ props }) => {
     const [chatClicked, setChatClicked] = useState(0);
@@ -32,8 +33,8 @@ const Chat = ({ props }) => {
                     updatedChatList[i] = {
                         // item,
                         text: item.message,
-                        title: item.subject == 'Expert' ? 'You' : 'Test2',
-                        className: item.subject == 'Expert' ? 'Expert' : 'User',
+                        title: item.senderId == userData[0].userId ? "You" : "User",
+                        className: item.senderId == userData[0].userId ? 'You' : 'User',
                         copiableDate: true,
                         dateString: new Date(),
                         focus: true,
