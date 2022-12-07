@@ -38,7 +38,7 @@ const QuestionsDisplay = () => {
     }
 
     return (
-        <div className="container" style={{ width: '100%', height: '100%', backgroundColor: '#F3F3F3' }}>
+        <div className="container" style={{ width: '100%', height: '100%', backgroundColor: '#0000' }}>
             <div>
                 <Table striped bordered hover className="userTable" style={{ width: '80%', }}>
                     <thead >

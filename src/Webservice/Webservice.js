@@ -34,6 +34,23 @@ export function postApiCall(url, data) {
   });
 }
 
+export const updateApi = (url, data) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .put(baseUrl + url, data, {
+        headers: {
+          Authorization: 'Bearer ' + authToken
+        }
+      })
+      .then(response => {
+        resolve(response);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  })
+};
+
 export function getApi(url) {
   return new Promise((resolve, reject) => {
     axios

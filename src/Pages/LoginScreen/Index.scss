@@ -73,7 +73,7 @@
         // box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
     }
 
-    .rce-container-mbox.Expert .rce-mbox {
+    .rce-container-mbox.You .rce-mbox {
         background: #86ffdd;
         // box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
     }
@@ -89,7 +89,7 @@
         user-select: none;
     }
 
-    .rce-container-mbox.Expert .rce-mbox-title {
+    .rce-container-mbox.You .rce-mbox-title {
         color: #3201f5d6;
     }
 
@@ -117,7 +117,7 @@
         margin-left: 11%;
     }
 
-    .rce-container-mbox.Expert .rce-mbox.rce-mbox--clear-notch.message-focus {
+    .rce-container-mbox.You .rce-mbox.rce-mbox--clear-notch.message-focus {
         margin: 3px 250px 8px 5px;
     }
 }

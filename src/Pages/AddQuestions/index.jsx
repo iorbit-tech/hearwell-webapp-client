@@ -21,7 +21,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "../LoginScreen/Index.scss";
-import { getApi } from "../../Webservice/Webservice";
+import { getApi, postApiCall, updateApi } from "../../Webservice/Webservice";
 import { authToken } from "../../utils/authChecker";
 const theme = createTheme();
 const AddQuestions = () => {
@@ -29,7 +29,7 @@ const AddQuestions = () => {
     question: "",
     createdBy: "",
     order: "",
-    answerType: "textbox",
+    answerType: "textinput",
     page: "tellus",
     options: [],
   };
@@ -39,7 +39,7 @@ const AddQuestions = () => {
 
   const [page, setPage] = useState("tellus");
   const [order, setOrder] = useState(1);
-  const [answerType, setAnsType] = useState("textbox");
+  const [answerType, setAnsType] = useState("textinput");
   const baseUrl = "http://178.128.165.237:8000";
   const [success, setSuccess] = useState(0);
   const [questionsData, setQuestionsData] = useState();
@@ -53,7 +53,7 @@ const AddQuestions = () => {
     } else {
       setPage("tellus");
       setOrder(1);
-      setAnsType("textbox");
+      setAnsType("textinput");
       setQuestionsData("");
     }
   }, [item]);
@@ -83,7 +83,7 @@ const AddQuestions = () => {
   };
   const onOptionChange = (e) => {
     const { name, value } = e.target;
-    if (value.includes(",")) {
+    if (value.includes("")) {
       const opt = value.split(",");
       setOptions(opt);
       setOptionText(value);
@@ -95,15 +95,9 @@ const AddQuestions = () => {
     setQuestionData({ ...questionData, [name]: value });
   };
 
-  const callAxios = (questionData) => {
-    console.log(questionData, "from call axios");
-    console.log(authToken, "authToken");
-    axios
-      .post(baseUrl + "/api/questions", questionData, {
-        headers: {
-          Authorization: "Bearer " + authToken,
-        },
-      })
+  const callAxios = (data) => {
+    console.log(data, "from call axios");
+    postApiCall("/api/questions", data,)
       .then((res) => {
         console.log(res, "responseee");
         setSuccess(1);
@@ -116,20 +110,9 @@ const AddQuestions = () => {
       });
   };
 
-  const callUpdateAxios = (questionData) => {
-    console.log("callUpdateAxios", questionsData);
-    axios
-      .put(
-        baseUrl + "/api/questions/" + questionsData.questionId,
-        questionData,
-        {
-          headers: {
-            Authorization:
-              "Bearer " +
-              authToken
-          },
-        }
-      )
+  const callUpdateAxios = (data) => {
+    console.log("callUpdateAxios", data);
+    updateApi("/api/questions/" + data.questionId, data,)
       .then((res) => {
         console.log(res, "responseee");
         setSuccess(2);
@@ -161,7 +144,11 @@ const AddQuestions = () => {
     // };
     // console.log(questionData, "questionsData");
     // if (item == undefined) {
-    callAxios(data);
+    if (item == undefined) {
+      callAxios(data);
+    } else {
+      callUpdateAxios(data);
+    }
     // } else {
     //   callUpdateAxios(questionData);
     // }
@@ -246,14 +233,18 @@ const AddQuestions = () => {
                         label="answer type"
                         onChange={handleAnsTypeChange}
                       >
-                        <MenuItem value={"textbox"}>Text Box</MenuItem>
+                        {/* <MenuItem value={"textbox"}>Text Box</MenuItem>
                         <MenuItem value={"checkbox"}>Checkbox</MenuItem>
                         <MenuItem value={"radio"}>Radio Button</MenuItem>
+                        <MenuItem value={"select"}>Select</MenuItem> */}
+                        <MenuItem value={"textinput"}>Text Input</MenuItem>
+                        <MenuItem value={"multiplechoice"}>Multiple Choice</MenuItem>
+                        <MenuItem value={"singlechoice"}>Single Choice</MenuItem>
                         <MenuItem value={"select"}>Select</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>
-                  {answerType != "textbox" ? (
+                  {answerType != "textinput" ? (
                     <>
                       <Grid item xs={12} sm={12}>
                         <TextField
@@ -290,7 +281,7 @@ const AddQuestions = () => {
                       variant="contained"
                       sx={{ mt: 3, mb: 2, backgroundColor: "#9a34e3" }}
                     >
-                      Save
+                      {questionsData == (undefined || '') ? <span>Save</span> : <span>Update</span>}
                     </Button>
                   </Grid>
                   <Grid item xs={6}>
@@ -306,6 +297,27 @@ const AddQuestions = () => {
 
                 <Grid container justifyContent="flex-end"></Grid>
               </Box>
+              {success == 1 && (
+                <Alert className="alertbox" severity="success">
+                  <AlertTitle>Success</AlertTitle>
+                  <strong>Question created successfully!</strong>
+                </Alert>
+              )
+              }
+              {success == 2 && (
+                <Alert className="alertbox" severity="success">
+                  <AlertTitle>Success</AlertTitle>
+                  <strong>Question updated successfully!</strong>
+                </Alert>
+              )
+              }
+              {success == -1 && (
+                <Alert className="alertbox" severity="error">
+                  <AlertTitle>Error</AlertTitle>
+                  <strong><span style={{ fontWeight: 'bolder' }}>Question order</span> already exists!</strong>
+                </Alert>
+              )
+              }
             </Box>
           </Paper>
           {/* <Copyright sx={{ mt: 5 }} /> */}
