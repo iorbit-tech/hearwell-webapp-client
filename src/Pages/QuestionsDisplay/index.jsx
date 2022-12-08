@@ -51,7 +51,7 @@ const QuestionsDisplay = () => {
                             <th>Order No</th>
                             <th>Ans Type</th>
                             <th>Question</th>
-                            <th colspan='4'>Options</th>
+                            <th>Options</th>
                             <th colspan='2' >Actions</th>
                         </tr>
                     </thead>
@@ -76,7 +76,7 @@ const QuestionsDisplay = () => {
                             <th>Order No</th>
                             <th>Ans Type</th>
                             <th>Question</th>
-                            <th colspan='4'>Options</th>
+                            <th>Options</th>
                             <th colspan='2' >Actions</th>
                         </tr>
                     </thead>
