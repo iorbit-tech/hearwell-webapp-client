@@ -8,7 +8,7 @@ import SendButton from "./SendButton";
 import { postApi, postApiCall } from "../../Webservice/Webservice";
 import { userData } from "../../utils/authChecker";
 
-const ChatScreen = ({ user, closeChat, chatList, getChatList }) => {
+const ChatScreen = ({ user, closeChat, chatList, getChatList, userId }) => {
     const [messageListArray, setMessageListArray] = useState([]);
     const [currentText, setCurrentText] = useState('');
     const [status, setStatus] = useState('');
@@ -36,7 +36,7 @@ const ChatScreen = ({ user, closeChat, chatList, getChatList }) => {
     async function submitChat(currentText) {
         const submitMessage = {
             subject: "Expert", message: currentText, sentTime: new Date(),
-            senderId: userData[0].userId, receiverId: "b68a5944-f1f2-4c1c-b82c-e654448da4c8", //need to handle Userid
+            senderId: userData[0].userId, receiverId: userId, //need to handle Userid
         }
 
         await postApiCall("/api/chat/", submitMessage)
@@ -70,8 +70,6 @@ const ChatScreen = ({ user, closeChat, chatList, getChatList }) => {
         text: currentText,
         title: 'You',
         focus: true,
-        // date: new Date(),
-        dateString: 'now',
         // avatar: `data:image/png;base64,${photo(20)}`,
         titleColor: '#4f81a1',
         // forwarded: true,

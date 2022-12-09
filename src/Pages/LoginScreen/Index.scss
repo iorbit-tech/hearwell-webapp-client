@@ -66,7 +66,7 @@
         background: #6200ff47;
         border-radius: 0 5px 5px;
         flex-direction: column;
-        margin: 3px 15px 8px 200px;
+        margin: 3px 15px 8px 180px;
         min-width: 140px;
         padding: 6px 9px 8px;
         position: relative;
@@ -75,6 +75,7 @@
 
     .rce-container-mbox.You .rce-mbox {
         background: #86ffdd;
+        margin: 3px 150px 8px 20px;
         // box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
     }
 
@@ -96,6 +97,12 @@
     .rce-mbox-text {
         font-size: 14px;
         word-break: break-word;
+    }
+
+    .rce-mbox-time {
+        font-size: 10px;
+        font-family: Verdana;
+        color: #767676;
     }
 
     .textAreaField textArea:focus {
