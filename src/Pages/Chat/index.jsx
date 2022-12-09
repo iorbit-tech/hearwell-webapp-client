@@ -8,36 +8,42 @@ import { userData } from "../../utils/authChecker";
 const Chat = ({ props }) => {
     const [chatClicked, setChatClicked] = useState(0);
     const [user, setUser] = useState('');
+    const [userId, setUserId] = useState('');
     const [chatList, setChatList] = useState([{}]);
+    const [usersList, setUsersList] = useState([]);
     let updatedChatList = []
 
-    const chatReply = (username) => {
+    const chatReply = (username, id) => {
+        console.log(id, 'id');
         setChatClicked(1);
         setUser(username);
-        console.log(username)
+        setUserId(id);
     }
 
     const closeChat = () => {
         setChatClicked(0);
     }
 
-
     useEffect(() => {
         getChatList();
-    }, []);
+        getUsersList();
+    }, [userId]);
 
     const getChatList = async () => {
-        return await getApi("/api/chat/b68a5944-f1f2-4c1c-b82c-e654448da4c8")  //need to handle Userid
+        console.log(userData, 'userData')
+        return await getApi("/api/chat/" + userId)
             .then(res => {
                 res.data.map((item, i) => {
+                    console.log(item, 'res.data.map')
                     updatedChatList[i] = {
                         // item,
                         text: item.message,
-                        title: item.senderId == userData[0].userId ? "You" : "User",
+                        title: item.senderId == userData[0].userId ? "You" : user,
                         className: item.senderId == userData[0].userId ? 'You' : 'User',
                         copiableDate: true,
-                        dateString: new Date(),
-                        focus: true,
+                        // dateString: new Date(),
+                        date: item.sentTime,
+                        focus: false,
                         notch: false,
                         type: "text",
                         senderId: item.senderId,
@@ -53,6 +59,18 @@ const Chat = ({ props }) => {
             });
     }
 
+    const getUsersList = async () => {
+        return await getApi("/api/user")
+            .then(res => {
+                setUsersList(res.data);
+                console.log(res.data, 'res_getUsersList');
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
+    console.log(userId, 'usersList');
     return (
         <div style={{ width: '100%', height: '100%', backgroundColor: '#0000' }} className="container">
             <Table striped bordered hover className="userTable">
@@ -65,24 +83,28 @@ const Chat = ({ props }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr className="usertBodyRow" align="center">
-                        <td >1</td>
-                        <td>11/10/2022</td>
-                        <td>Test2</td>
-                        <td onClick={() => chatReply('Test2')} style={{ fontWeight: '500', cursor: 'pointer' }} >Reply</td>
-                        <td onClick={() => ''} style={{ fontWeight: '400', cursor: 'pointer' }} >Delete</td>
-                    </tr>
-                    <tr className="usertBodyRow" align="center">
+                    {usersList.map((users, i) =>
+                        <tr className="usertBodyRow" align="center">
+                            <td >{i + 1}</td>
+                            <td>11/10/2022</td>
+                            <td>
+                                {users.userName}
+                            </td>
+                            <td onClick={() => chatReply(users.userName, users.userId)} style={{ fontWeight: '500', cursor: 'pointer' }} >Reply</td>
+                            <td onClick={() => ''} style={{ fontWeight: '400', cursor: 'pointer' }} >Delete</td>
+                        </tr>
+                    )}
+                    {/* <tr className="usertBodyRow" align="center">
                         <td>2</td>
                         <td>11/16/2022</td>
                         <td>User2</td>
                         <td onClick={() => chatReply('User2')} style={{ fontWeight: '500', cursor: 'pointer' }} >Reply</td>
                         <td onClick={() => ''} style={{ fontWeight: '400', cursor: 'pointer' }}>Delete</td>
-                    </tr>
+                    </tr> */}
                 </tbody>
             </Table>
             {chatClicked > 0 &&
-                <ChatScreen {...props} user={user} getChatList={getChatList} chatList={chatList} closeChat={closeChat} />
+                <ChatScreen {...props} user={user} userId={userId} getChatList={getChatList} chatList={chatList} closeChat={closeChat} />
             }
         </div>
     );
