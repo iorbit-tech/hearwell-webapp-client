@@ -34,11 +34,11 @@ const App = () => {
           <Route path="/register" element={<RegForm />} />
           <Route path="/editquestion/:item" element={<AddQuestions />} />
           <Route path="/addquestions" element={<AddQuestions />} />
-          <Route path="/tellus" element={<Tellus />} />
+          <Route path="/tellus/:username" element={<Tellus />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/allquestions" element={<QuestionsDisplay />} />
           <Route path="/selectUsers" element={< SelectUsers />} />
-          <Route path="/hearingdiary" element={<HearingDiary />} />
+          <Route path="/hearingdiary/:username" element={<HearingDiary />} />
         </Route>
       </Routes>
     </div>

@@ -65,10 +65,10 @@ const SelectUsers = ({ props }) => {
                 </tbody>
             </Table>
             {TellusClicked == 1 &&
-                nav("/tellus")
+                nav("/tellus/" + user)
             }
             {HearingClicked == 1 &&
-                nav("/hearingdiary")
+                nav("/hearingdiary/" + user)
             }
         </div>
 

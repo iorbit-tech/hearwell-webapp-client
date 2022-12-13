@@ -1,11 +1,13 @@
 import { Table } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { getApi, postApiCall } from "../../Webservice/Webservice";
+import { useParams } from "react-router-dom";
+import { getApi } from "../../Webservice/Webservice";
 import "../LoginScreen/Index.scss";
 import { Answers } from "./Answers";
 
 const HearingDiary = () => {
     const [hearingQuestions, setHearingQuestions] = useState([]);
+    const { username } = useParams();
 
     useEffect(() => {
         getHearingQuestions();
@@ -25,8 +27,8 @@ const HearingDiary = () => {
         <div style={{ width: '100%', height: '100%', backgroundColor: '#0000' }} className="container">
             <div style={{ flex: 1, width: '30%', alignSelf: 'center', padding: 100 }}>
                 <div>
-                    <h3 style={{ textAlign: 'center' }}>Tellus More</h3>
-                    <h3 style={{ textAlign: 'center' }}> { }</h3>
+                    <h3 style={{ textAlign: 'center' }}>HearingDiary</h3>
+                    <h3 style={{ textAlign: 'center' }}> {username}</h3>
                 </div>
                 <Table striped bordered hover className="userTable" style={{ width: '80%', }}>
                     <thead >
