@@ -11,6 +11,8 @@ import Tellus from "./Pages/TellUs";
 import Chat from "./Pages/Chat";
 import QuestionsDisplay from "./Pages/QuestionsDisplay";
 import { userData, authToken } from "./utils/authChecker";
+import SelectUsers from "./Pages/SelectUsers";
+import HearingDiary from "./Pages/HearingDiary";
 
 const App = () => {
   const nav = useNavigate();
@@ -35,6 +37,8 @@ const App = () => {
           <Route path="/tellus" element={<Tellus />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/allquestions" element={<QuestionsDisplay />} />
+          <Route path="/selectUsers" element={< SelectUsers />} />
+          <Route path="/hearingdiary" element={<HearingDiary />} />
         </Route>
       </Routes>
     </div>

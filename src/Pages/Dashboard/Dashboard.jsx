@@ -76,31 +76,36 @@ export default function DashBoard() {
   const theme = useTheme();
   const navigate = useNavigate();
   const sideBarData = [
-   
+
     {
       text: "Add Qns",
-      icon: <AddCommentIcon style={{color:"#9a34e3"}} />,
+      icon: <AddCommentIcon style={{ color: "#9a34e3" }} />,
       nav: "addquestions",
     },
     {
       text: "Tellus More",
-      icon: <MoreIcon style={{color:"#9a34e3"}} />,
+      icon: <MoreIcon style={{ color: "#9a34e3" }} />,
       nav: "tellus",
     },
     {
       text: "Chat",
-      icon: <ChatBubbleOutlineOutlined style={{color:"#9a34e3"}} />,
+      icon: <ChatBubbleOutlineOutlined style={{ color: "#9a34e3" }} />,
       nav: "chat",
     },
     {
       text: "All Questions",
-      icon: <QuestionAnswerIcon style={{color:"#9a34e3"}} />,
+      icon: <QuestionAnswerIcon style={{ color: "#9a34e3" }} />,
       nav: "allquestions",
     },
     {
       text: "User Register",
-      icon: <SupervisedUserCircle style={{color:"#9a34e3"}} />,
+      icon: <SupervisedUserCircle style={{ color: "#9a34e3" }} />,
       nav: "register",
+    },
+    {
+      text: "Select User",
+      icon: <SupervisedUserCircle style={{ color: "#9a34e3" }} />,
+      nav: "SelectUsers",
     },
   ];
   const [open, setOpen] = React.useState(
@@ -123,7 +128,7 @@ export default function DashBoard() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open} style={{backgroundColor:"#9a34e3"}}>
+      <AppBar position="fixed" open={open} style={{ backgroundColor: "#9a34e3" }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -171,7 +176,7 @@ export default function DashBoard() {
             >
               <ListItemButton>
                 <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.text} style={{color:"#9a34e3"}}/>
+                <ListItemText primary={item.text} style={{ color: "#9a34e3" }} />
               </ListItemButton>
             </ListItem>
           ))}
