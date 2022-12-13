@@ -15,7 +15,6 @@ export const postApi = (url, data) => {
 };
 
 export function postApiCall(url, data) {
-  console.log(authToken, 'authToken');
   return new Promise((resolve, reject) => {
     axios
       .post(baseUrl + url, data, {
