@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "@mui/material";
 import { getApi } from "../../Webservice/Webservice";
-import { userData } from "../../utils/authChecker";
-import Tellus from "../TellUs";
 import { useNavigate } from "react-router-dom";
 
 const SelectUsers = ({ props }) => {
     const [TellusClicked, setTellusClicked] = useState(0);
     const [HearingClicked, setHearingClicked] = useState(0);
     const [user, setUser] = useState('');
-    const [userId, setUserId] = useState('');
-    const [chatList, setChatList] = useState([{}]);
     const [usersList, setUsersList] = useState([]);
     const nav = useNavigate();
 
@@ -18,7 +14,6 @@ const SelectUsers = ({ props }) => {
         console.log(id, 'id');
         setTellusClicked(1);
         setUser(username);
-        // setUserId(id);
         localStorage.setItem("UserId", id);
     }
 
@@ -26,7 +21,6 @@ const SelectUsers = ({ props }) => {
         console.log(id, 'id');
         setHearingClicked(1);
         setUser(username);
-        // setUserId(id);
         localStorage.setItem("UserId", id);
     }
 
@@ -45,7 +39,6 @@ const SelectUsers = ({ props }) => {
             });
     }
 
-    console.log(userId, 'usersList');
     return (
         <div style={{ width: '100%', height: '100%', backgroundColor: '#0000' }} className="container">
             <Table striped bordered hover className="userTable">

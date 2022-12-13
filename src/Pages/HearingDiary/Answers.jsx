@@ -18,5 +18,17 @@ export function Answers({ id }) {
 
         getAnsData(id);
     }, []);
-    return <span>{ansData}</span>;
+    return (
+        <div>
+            {ansData.map((item) => {
+                return (
+                    <div>
+                        <span>{item}</span>
+                        <br></br>
+                        <hr></hr>
+                    </div>
+                )
+            })}
+        </div>
+    )
 }
