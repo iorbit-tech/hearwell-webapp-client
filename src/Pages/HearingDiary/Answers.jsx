@@ -20,15 +20,19 @@ export function Answers({ id }) {
     }, []);
     return (
         <div>
-            {ansData.map((item) => {
-                return (
-                    <div>
-                        <span>{item}</span>
-                        <br></br>
-                        <hr></hr>
-                    </div>
+            {
+                ansData.length > 0 && (
+                    ansData.map((item) => {
+                        return (
+                            <div>
+                                <span>{item}</span>
+                                <br></br>
+                                <hr></hr>
+                            </div>
+                        )
+                    })
                 )
-            })}
+            }
         </div>
     )
 }
