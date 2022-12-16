@@ -28,7 +28,7 @@ export function Answers({ id }) {
     console.log(ansData, 'ansData')
 
     return (
-        <div style={{ display: 'flex', height: '100px', }}>
+        <div style={{ display: 'flex', height: '100%', }}>
             {
                 ansData.length > 0 && (
                     ansData.map((item, Index) => {
@@ -38,7 +38,7 @@ export function Answers({ id }) {
                         // console.log(Time, 'date')
                         return (
 
-                            <td style={{ width: 100, border: 'none', borderRight: '1px solid' }} >
+                            <td style={{ width: 150, border: 'none', borderRight: '1px solid', }} >
                                 {/* <span>{Time}</span> */}
                                 {/* <br></br> */}
                                 {item.options.map((finalData) => {
