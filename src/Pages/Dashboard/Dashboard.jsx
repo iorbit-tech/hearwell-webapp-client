@@ -82,11 +82,11 @@ export default function DashBoard() {
       icon: <AddCommentIcon style={{ color: "#9a34e3" }} />,
       nav: "addquestions",
     },
-    {
-      text: "Tellus More",
-      icon: <MoreIcon style={{ color: "#9a34e3" }} />,
-      nav: "tellus",
-    },
+    // {
+    //   text: "Tellus More",
+    //   icon: <MoreIcon style={{ color: "#9a34e3" }} />,
+    //   nav: "tellus",
+    // },
     {
       text: "Chat",
       icon: <ChatBubbleOutlineOutlined style={{ color: "#9a34e3" }} />,

@@ -56,7 +56,7 @@ export default function Login() {
         JSON.parse(localStorage.getItem("userData"))
       );
       if (resp.data.token) nav("/home")
-    }).error((err)=>console.log(err))
+    }).error((err) => console.log(err))
     // postApi("/api/user/login", newData).then((resp) => console.log(resp));
   };
 
@@ -142,14 +142,14 @@ export default function Login() {
               >
                 Continue with Google
               </Button>
-              <Button
+              {/* <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mb: 2 }}
               >
                 Continue with Apple ID
-              </Button>
+              </Button> */}
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
