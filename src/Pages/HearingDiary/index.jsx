@@ -25,8 +25,8 @@ const HearingDiary = () => {
 
     return (
         <div style={{ width: '100%', height: '100%', backgroundColor: '#0000' }} className="container">
-            <div style={{ flex: 1, width: '30%', alignSelf: 'center', padding: 100 }}>
-                <div>
+            <div style={{ flex: 1, padding: 100 }}>
+                <div style={{ alignSelf: 'center' }}>
                     <h3 style={{ textAlign: 'center' }}>HearingDiary</h3>
                     <h3 style={{ textAlign: 'center' }}> {username}</h3>
                 </div>
@@ -39,7 +39,6 @@ const HearingDiary = () => {
                             <th>Order No</th>
                             <th>Ans Type</th>
                             <th>Question</th>
-                            {/* <th>Options</th> */}
                             <th>Answers</th>
                         </tr>
                     </thead>
@@ -50,11 +49,7 @@ const HearingDiary = () => {
                                     <td style={{ width: '2%' }}>{item.order}</td>
                                     <td style={{ fontWeight: '500', width: '8%' }} >{item.answerType}</td>
                                     <td style={{ fontWeight: '400', width: '22%', padding: 0 }} >{item.question}</td>
-                                    <div>
-                                        <td style={{ border: 'none' }}>
-                                            <Answers id={item.questionId} />
-                                        </td>
-                                    </div>
+                                    <Answers id={item.questionId} />
                                 </tr >
                             )
                         })}
