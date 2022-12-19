@@ -43,13 +43,13 @@ const HearingDiary = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {hearingQuestions.map(item => {
+                        {hearingQuestions.map((item, index) => {
                             return (
                                 <tr className="usertBodyRow" align="center">
                                     <td style={{ width: '2%' }}>{item.order}</td>
                                     <td style={{ fontWeight: '500', width: '8%' }} >{item.answerType}</td>
-                                    <td style={{ fontWeight: '400', width: '22%', padding: 0 }} >{item.question}</td>
-                                    <Answers id={item.questionId} />
+                                    <td style={{ fontWeight: '400', width: '22%', padding: 0, minWidth: '200px' }} >{item.question}</td>
+                                    <Answers id={item.questionId} index={index} />
                                 </tr >
                             )
                         })}
