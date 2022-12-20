@@ -8,7 +8,8 @@ const FireBasePopUp = ({ sign }) => {
   //   const [sign, setSign] = useEffect(false);
   const nav = useNavigate();
   useEffect(() => {
-    signInWithGoogle();
+    if(sign) signInWithGoogle()
+    
   }, [sign]);
   const signInWithGoogle = () => {
     //Call this function to get the user data

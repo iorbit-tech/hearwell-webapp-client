@@ -8,7 +8,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -22,6 +22,9 @@ import {
   Paper,
   Select,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import Snackbar from "../SnakBar/Snakbar";
+import Snackbars from "../SnakBar/Snakbar";
 
 function Copyright(props) {
   return (
@@ -50,9 +53,11 @@ export default function RegForm() {
     email: "",
     password: "",
   };
-
+  const nav = useNavigate();
   const [user, setUser] = React.useState({ signUpData });
   const [error, setError] = React.useState("");
+  const [snak, setSnak] = React.useState(false);
+
   const onChangeHanddle = (e) => {
     // if (!validEmail.test(e.target.value)) {
     //   setError("Enter valid email");
@@ -78,7 +83,10 @@ export default function RegForm() {
     } else {
       axios
         .post(baseUrl + "/api/user", userData)
-        .then((res) => console.error(res, "responseee"))
+        .then((res) => {
+          setSnak(true)
+          nav("/login");
+        })
         .catch((err) => console.error(err));
     }
     console.log({
@@ -101,6 +109,12 @@ export default function RegForm() {
               alignItems: "center",
             }}
           >
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign up
+            </Typography>
             <Box
               component="form"
               noValidate
@@ -119,7 +133,7 @@ export default function RegForm() {
                       id="page-select"
                       //value={page}
                       label="Page"
-                    //onChange={handlePageChange}
+                      //onChange={handlePageChange}
                     >
                       <MenuItem value={"admin"}>Admin</MenuItem>
                       <MenuItem value={"expert"}>Expert</MenuItem>
@@ -138,7 +152,7 @@ export default function RegForm() {
                     autoFocus
                     error={false}
                     onChange={(e) => onChangeHanddle(e)}
-                  // helperText={error}
+                    // helperText={error}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -190,7 +204,10 @@ export default function RegForm() {
                 </Grid>
                 <Grid item xs={6}>
                   <Button
-                    type="submit"
+                  onClick={()=>{
+                    setSnak(true)
+                  }}
+                    //type="submit"
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2, backgroundColor: "#9a34e3" }}
@@ -206,6 +223,7 @@ export default function RegForm() {
         </Paper>
         {/* <Copyright sx={{ mt: 5 }} /> */}
       </Container>
+      <Snackbars snak={snak} setSnak={setSnak} severity="success" />
     </ThemeProvider>
   );
 }

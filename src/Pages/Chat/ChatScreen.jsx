@@ -31,12 +31,12 @@ const ChatScreen = ({ user, closeChat, chatList, getChatList, userId }) => {
         }
     }, [currentText]);
 
-    console.log(userData[0].userId, 'userData');
+    console.log(userData.userId, 'userData');
 
     async function submitChat(currentText) {
         const submitMessage = {
             subject: "Expert", message: currentText, sentTime: new Date(),
-            senderId: userData[0].userId, receiverId: userId, //need to handle Userid
+            senderId: userData.userId, receiverId: userId, //need to handle Userid
         }
 
         await postApiCall("/api/chat/", submitMessage)
