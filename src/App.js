@@ -17,9 +17,15 @@ import HearingDiary from "./Pages/HearingDiary";
 const App = () => {
   const nav = useNavigate();
   useEffect(() => {
+    console.log(authToken, "auth token use effect");
     if (authToken) {
+      if (authToken == "null") {
+        console.log("auth is null");
+        nav("/login");
+      } else {
+        nav("/addquestions");
+      }
       // <Navigate replace to="/addquestions" />
-      nav("/addquestions");
     } else {
       nav("/login");
     }
@@ -37,7 +43,7 @@ const App = () => {
           <Route path="/tellus/:username" element={<Tellus />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/allquestions" element={<QuestionsDisplay />} />
-          <Route path="/selectUsers" element={< SelectUsers />} />
+          <Route path="/selectUsers" element={<SelectUsers />} />
           <Route path="/hearingdiary/:username" element={<HearingDiary />} />
         </Route>
       </Routes>
