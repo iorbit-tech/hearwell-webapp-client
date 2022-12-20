@@ -15,6 +15,10 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { baseUrl, postApi } from "../../Webservice/Webservice";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+// import { firebase } from "../../firebase/config";
+import app, { signInWithGoogle } from "../../firebase/googleSignIn";
+import FireBasePopUp from "../FireBasePopUp/FireBasePopUp";
 
 function Copyright(props) {
   return (
@@ -37,7 +41,11 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Login() {
-  const nav = useNavigate()
+  const [sign, setSign] = React.useState(false);
+
+  // const auth = getAuth(firebase)
+  // const provider= new GoogleAuthProvider()
+  const nav = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -47,19 +55,26 @@ export default function Login() {
     };
     console.log(newData);
 
-    axios.post(baseUrl + "/api/user/login", newData).then((resp) => {
-      localStorage.setItem("authToken", resp.data.token);
-      localStorage.setItem("userData", JSON.stringify(resp.data.data));
+    postApi("/api/user/login", newData)
+      .then((resp) => {
+        console.log(resp, "usr login");
+        localStorage.setItem("authToken", resp.data.token);
+        localStorage.setItem("userData", JSON.stringify(resp.data.user));
 
-      console.log(
-        resp.data.token,
-        JSON.parse(localStorage.getItem("userData"))
-      );
-      if (resp.data.token) nav("/home")
-    }).error((err) => console.log(err))
+        console.log(
+          resp.data.token,
+          JSON.parse(localStorage.getItem("userData"))
+        );
+        if (resp.data.token) nav("/addquestions");
+      })
+      .catch((err) => console.log(err));
     // postApi("/api/user/login", newData).then((resp) => console.log(resp));
   };
-
+  const signInWithGoogleFn = async () => {
+    // const ggleLogin = await signInWithGoogle();
+    // await console.log(ggleLogin,"google loginnnn")
+    setSign(!sign)
+  };
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
@@ -135,7 +150,8 @@ export default function Login() {
                 Log In
               </Button>
               <Button
-                type="submit"
+                onClick={signInWithGoogleFn}
+                // type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 1 }}
@@ -167,6 +183,7 @@ export default function Login() {
           </Box>
         </Grid>
       </Grid>
+      <FireBasePopUp sign={sign} />
     </ThemeProvider>
   );
 }

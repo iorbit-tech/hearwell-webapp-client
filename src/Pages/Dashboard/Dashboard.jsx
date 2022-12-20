@@ -20,10 +20,14 @@ import { Navigate, Outlet, useNavigate } from "react-router-dom";
 // import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from "@mui/icons-material/Mail";
 import ArticleIcon from "@mui/icons-material/Article";
-import { ChatBubbleOutlineOutlined, SupervisedUserCircle } from "@mui/icons-material";
-import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
-import AddCommentIcon from '@mui/icons-material/AddComment';
-import MoreIcon from '@mui/icons-material/More';
+import {
+  ChatBubbleOutlineOutlined,
+  LogoutRounded,
+  SupervisedUserCircle,
+} from "@mui/icons-material";
+import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
+import AddCommentIcon from "@mui/icons-material/AddComment";
+import MoreIcon from "@mui/icons-material/More";
 
 const drawerWidth = 240;
 
@@ -76,7 +80,6 @@ export default function DashBoard() {
   const theme = useTheme();
   const navigate = useNavigate();
   const sideBarData = [
-
     {
       text: "Add Qns",
       icon: <AddCommentIcon style={{ color: "#9a34e3" }} />,
@@ -123,12 +126,24 @@ export default function DashBoard() {
   const handleClick = (nav) => {
     console.log(nav);
     navigate(nav);
+   
   };
+
+  const logout = () => {
+    console.log("log out");
+    localStorage.setItem("authToken",null );
+    localStorage.setItem("userData", null);
+    navigate("/login")
+  }
 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open} style={{ backgroundColor: "#9a34e3" }}>
+      <AppBar
+        position="fixed"
+        open={open}
+        style={{ backgroundColor: "#9a34e3" }}
+      >
         <Toolbar>
           <IconButton
             color="inherit"
@@ -139,9 +154,21 @@ export default function DashBoard() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Hearwell
-          </Typography>
+          <div style={{width:"100%",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+            <Typography variant="h6" noWrap component="div">
+              Hearwell
+            </Typography>
+            <IconButton
+            onClick={logout}
+              color="inherit"
+              // aria-label="open drawer"
+              // onClick={handleDrawerOpen}
+              // edge="start"
+              // sx={{ mr: 2, ...(open && { display: "none" }) }}
+            >
+              <LogoutRounded />
+            </IconButton>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -176,7 +203,10 @@ export default function DashBoard() {
             >
               <ListItemButton>
                 <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.text} style={{ color: "#9a34e3" }} />
+                <ListItemText
+                  primary={item.text}
+                  style={{ color: "#9a34e3" }}
+                />
               </ListItemButton>
             </ListItem>
           ))}
@@ -195,9 +225,9 @@ export default function DashBoard() {
           ))}
         </List> */}
       </Drawer>
-      <Main open={open} >
+      <Main open={open}>
         {/* <DrawerHeader /> */}
-        <div className="route-container" >
+        <div className="route-container">
           <Outlet />
         </div>
       </Main>
