@@ -16,10 +16,10 @@
     }
 
     .userTable {
-        width: 50%;
-        background: #dbdbdb;
-        margin-top: 100px;
-        margin-bottom: 5px;
+        // width: 50%;
+        // background: #dbdbdb;
+        // margin-top: 100px;
+        // margin-bottom: 5px;
         // margin-left: 1%;
         // box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
     }
@@ -57,62 +57,62 @@
         position: sticky;
         left: 0;
         z-index: 2;
-        background-color: #dbdbdb;
+        background-color: #fff;
     }
 
     .userTable thead .thSecond {
         position: sticky;
         left: 0;
         z-index: 2;
-        background-color: #dbdbdb;
+        background-color: #fff;
     }
 
-    th.thFirst:after {
-        content: '';
-        border-right: 2px solid #545454ad;
-        height: 100%;
-        overflow: auto;
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
+    // th.thFirst:after {
+    //     content: '';
+    //     // border-right: 2px solid #545454ad;
+    //     height: 100%;
+    //     overflow: auto;
+    //     position: absolute;
+    //     top: 0;
+    //     right: 0;
+    // }
 
-    th.thSecond:after {
-        content: '';
-        border-right: 2px solid #545454ad;
-        height: 100%;
-        overflow: auto;
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
+    // th.thSecond:after {
+    //     content: '';
+    //     // border-right: 2px solid #545454ad;
+    //     height: 100%;
+    //     overflow: auto;
+    //     position: absolute;
+    //     top: 0;
+    //     right: 0;
+    // }
 
 
-    td.tdFirst:after {
-        content: '';
-        border-right: 2px solid #545454ad;
-        height: 100%;
-        overflow: auto;
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
+    // td.tdFirst:after {
+    //     content: '';
+    //     // border-right: 2px solid #545454ad;
+    //     height: 100%;
+    //     overflow: auto;
+    //     position: absolute;
+    //     top: 0;
+    //     right: 0;
+    // }
 
-    td.tdSecond:after {
-        content: '';
-        border-right: 2px solid #545454ad;
-        height: 100%;
-        overflow: auto;
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
+    // td.tdSecond:after {
+    //     content: '';
+    //     // border-right: 2px solid #545454ad;
+    //     height: 100%;
+    //     overflow: auto;
+    //     position: absolute;
+    //     top: 0;
+    //     right: 0;
+    // }
 
     .userTable tbody .tdSecond {
         position: sticky;
         left: 0;
         z-index: 999;
-        background-color: #dbdbdb;
+        background-color: #fff;
     }
 
     .userTable table tbody th .usertBodyRow {
@@ -131,6 +131,10 @@
         // color: #404040;
         // font-family: georgia;
         // font-weight: 500;
+    }
+
+    .userTable td:nth-child(2n+2) {
+        background: aliceblue;
     }
 
     table.even {

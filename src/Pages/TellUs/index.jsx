@@ -27,7 +27,7 @@ const Tellus = () => {
     return (
         <div style={{ width: '100%', height: '100%', backgroundColor: '#0000' }} className="container">
             <div style={{ flex: 1, alignSelf: 'center', padding: 100 }}>
-                <Paper sx={{ width: "100%", }}>
+                <Paper sx={{ width: "100%" }}>
                     <Table className="even">
                         <thead style={{
                             backgroundColor: "#51b3ff",
