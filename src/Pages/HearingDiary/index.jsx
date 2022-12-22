@@ -30,31 +30,33 @@ const HearingDiary = () => {
                     <h3 style={{ textAlign: 'center' }}>HearingDiary</h3>
                     <h3 style={{ textAlign: 'center' }}> {username}</h3>
                 </div>
-                <Table striped bordered hover className="userTable" style={{ width: '80%', }}>
-                    <thead >
-                        <td style={{ textAlign: 'center', fontSize: 25, fontWeight: 'bold' }} colspan='11'>HearingDiary</td>
-                    </thead>
-                    <thead>
-                        <tr className="userHeadRow">
-                            <th>Order No</th>
-                            <th>Ans Type</th>
-                            <th>Question</th>
-                            <th>Answers</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {hearingQuestions.map((item, index) => {
-                            return (
-                                <tr className="usertBodyRow" align="center">
-                                    <td style={{ width: '2%' }}>{item.order}</td>
-                                    <td style={{ fontWeight: '500', width: '8%' }} >{item.answerType}</td>
-                                    <td style={{ fontWeight: '400', width: '22%', padding: 0, minWidth: '200px' }} >{item.question}</td>
-                                    <Answers id={item.questionId} index={index} />
-                                </tr >
-                            )
-                        })}
-                    </tbody>
-                </Table>
+                <div style={{ display: 'flex', overflow: 'auto', width: 1200 }}>
+                    <Table striped bordered hover className="userTable" style={{ width: '80%', }}>
+                        <thead >
+                            <td style={{ textAlign: 'center', fontSize: 25, fontWeight: 'bold' }} colspan='11'>HearingDiary</td>
+                        </thead>
+                        <thead>
+                            <tr className="userHeadRow">
+                                {/* <th style={{ position: 'sticky' }}>Order No</th> */}
+                                {/* <th>Ans Type</th> */}
+                                <th>Question</th>
+                                <th>Answers</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {hearingQuestions.map((item, index) => {
+                                return (
+                                    <tr className="usertBodyRow" align="center">
+                                        {/* <td style={{ width: '2%', position: 'sticky' }}>{item.order}</td> */}
+                                        {/* <td style={{ fontWeight: '500', width: '8%' }} >{item.answerType}</td> */}
+                                        <td className="tdFirst" style={{ fontWeight: '400', width: '22%', padding: 0, minWidth: '200px' }} >{item.question}</td>
+                                        <Answers id={item.questionId} index={index} />
+                                    </tr >
+                                )
+                            })}
+                        </tbody>
+                    </Table>
+                </div>
             </div>
         </div>
     );

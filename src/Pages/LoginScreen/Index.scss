@@ -32,6 +32,26 @@
         padding: 10px
     }
 
+    .userTable thead th:first-child {
+        position: sticky;
+        left: 0;
+        z-index: 2;
+        background-color: #dbdbdb;
+    }
+
+    .userTable tbody .tdFirst {
+        position: sticky;
+        left: 0;
+        z-index: 999;
+        background-color: #dbdbdb;
+    }
+
+    .userTable table tbody th .usertBodyRow {
+        position: sticky;
+        left: 0;
+        background: white;
+        z-index: 1;
+    }
 
     .userHeadRow {
         border-bottom: 2px solid rgb(83, 83, 83);
