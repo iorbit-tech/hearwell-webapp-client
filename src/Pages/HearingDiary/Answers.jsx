@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { compare } from "../../Components/utills";
 import { postApiCall } from "../../Webservice/Webservice";
 
 export function Answers({ id, index }) {
@@ -19,6 +20,8 @@ export function Answers({ id, index }) {
 
         getAnsData(id);
     }, []);
+
+    ansData.sort(compare);
 
     return (
         <div style={{ display: 'flex', height: '100%', }}>

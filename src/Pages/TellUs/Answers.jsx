@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { compare } from "../../Components/utills";
 import { postApiCall } from "../../Webservice/Webservice";
 
 export function Answers({ id }) {
@@ -18,6 +19,9 @@ export function Answers({ id }) {
 
         getAnsData(id);
     }, []);
+
+    ansData.sort(compare);
+
     return (
         <div>
             {

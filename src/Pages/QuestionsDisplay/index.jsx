@@ -4,6 +4,7 @@ import { Table } from "@mui/material";
 import QuestionsTable from "./QuestionsTable";
 import { getApi } from "../../Webservice/Webservice";
 import TellusQuestionsList from "./TellusQuestionsList";
+import { compare } from "../../Components/utills";
 
 const QuestionsDisplay = () => {
     const [tellusQuestions, setTellusQuestions] = useState([]);
@@ -36,6 +37,9 @@ const QuestionsDisplay = () => {
                 console.log(error);
             });
     }
+
+    tellusQuestions.sort(compare);
+    hearingQuestions.sort(compare);
 
     return (
         <div className="container" style={{ width: '100%', height: '100%', backgroundColor: '#0000' }}>
