@@ -5,8 +5,6 @@
     display: flex;
     flex-direction: column;
 
-    .title-bar {}
-
     .body-cont {
         display: flex;
 
@@ -32,6 +30,74 @@
         padding: 10px
     }
 
+    .userTable thead th:first-child {
+        position: sticky;
+        left: 0;
+        z-index: 2;
+        background-color: #dbdbdb;
+    }
+
+    .userTable thead .thSecond {
+        position: sticky;
+        left: 0;
+        z-index: 2;
+        background-color: #dbdbdb;
+    }
+
+    th.thFirst:after {
+        content: '';
+        border-right: 2px solid #545454ad;
+        height: 100%;
+        overflow: auto;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    th.thSecond:after {
+        content: '';
+        border-right: 2px solid #545454ad;
+        height: 100%;
+        overflow: auto;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+
+    td.tdFirst:after {
+        content: '';
+        border-right: 2px solid #545454ad;
+        height: 100%;
+        overflow: auto;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    td.tdSecond:after {
+        content: '';
+        border-right: 2px solid #545454ad;
+        height: 100%;
+        overflow: auto;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .userTable tbody .tdSecond {
+        position: sticky;
+        left: 0;
+        z-index: 999;
+        background-color: #dbdbdb;
+    }
+
+    .userTable table tbody th .usertBodyRow {
+        position: sticky;
+        left: 0;
+        background: white;
+        z-index: 1;
+    }
 
     .userHeadRow {
         border-bottom: 2px solid rgb(83, 83, 83);
