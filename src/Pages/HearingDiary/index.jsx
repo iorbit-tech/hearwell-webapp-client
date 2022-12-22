@@ -34,11 +34,11 @@ const HearingDiary = () => {
                     <Table striped bordered hover className="userTable" style={{ width: '80%', }}>
                         <thead>
                             <tr className="userHeadRow">
-                                {/* <th style={{ position: 'sticky' }}>Order No</th> */}
+                                <th className="thFirst" style={{ position: 'sticky', left: 0, zIndex: 1000, backgroundColor: '#dbdbdb' }}>Order No</th>
                                 {/* <th>Ans Type</th> */}
-                                <th className="thFirst">Question</th>
+                                <th className="thSecond">Question</th>
                                 <th style={{
-                                    position: 'absolute', border: 'none', right: ' 45%'
+                                    position: 'absolute', border: 'none', right: ' 35%'
                                 }}>Answers</th>
                             </tr>
                         </thead>
@@ -46,9 +46,9 @@ const HearingDiary = () => {
                             {hearingQuestions.map((item, index) => {
                                 return (
                                     <tr className="usertBodyRow" align="center">
-                                        {/* <td style={{ width: '2%', position: 'sticky' }}>{item.order}</td> */}
+                                        <td className="tdFirst" style={{ width: '2%', position: 'sticky', left: 0, zIndex: 1000, backgroundColor: '#dbdbdb' }}>{item.order}</td>
                                         {/* <td style={{ fontWeight: '500', width: '8%' }} >{item.answerType}</td> */}
-                                        <td className="tdFirst" style={{ fontWeight: '400', width: '22%', padding: 0, minWidth: '200px' }} >{item.question}</td>
+                                        <td className="tdSecond" style={{ fontWeight: '400', width: '22%', paddingLeft: 50, minWidth: '300px' }} >{item.question}</td>
                                         <Answers id={item.questionId} index={index} />
                                     </tr >
                                 )
