@@ -27,20 +27,19 @@ const HearingDiary = () => {
         <div style={{ width: '100%', height: '100%', backgroundColor: '#0000' }} className="container">
             <div style={{ flex: 1, padding: 100 }}>
                 <div style={{ alignSelf: 'center' }}>
-                    <h3 style={{ textAlign: 'center' }}>HearingDiary</h3>
+                    <h3 style={{ textAlign: 'center', }}>HearingDiary</h3>
                     <h3 style={{ textAlign: 'center' }}> {username}</h3>
                 </div>
-                <div style={{ display: 'flex', overflow: 'auto', width: 1200 }}>
+                <div style={{ display: 'flex', overflow: 'auto', width: 1000 }}>
                     <Table striped bordered hover className="userTable" style={{ width: '80%', }}>
-                        <thead >
-                            <td style={{ textAlign: 'center', fontSize: 25, fontWeight: 'bold' }} colspan='11'>HearingDiary</td>
-                        </thead>
                         <thead>
                             <tr className="userHeadRow">
                                 {/* <th style={{ position: 'sticky' }}>Order No</th> */}
                                 {/* <th>Ans Type</th> */}
-                                <th>Question</th>
-                                <th>Answers</th>
+                                <th className="thFirst">Question</th>
+                                <th style={{
+                                    position: 'absolute', border: 'none', right: ' 45%'
+                                }}>Answers</th>
                             </tr>
                         </thead>
                         <tbody>
