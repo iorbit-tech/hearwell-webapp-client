@@ -1,6 +1,7 @@
 import { Table } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { compare } from "../../Components/utills";
 import { getApi } from "../../Webservice/Webservice";
 import "../LoginScreen/Index.scss";
 import { Answers } from "./Answers";
@@ -22,7 +23,7 @@ const Tellus = () => {
                 console.log(error);
             });
     }
-
+    tellusQuestions.sort(compare);
     return (
         <div style={{ width: '100%', height: '100%', backgroundColor: '#0000' }} className="container">
             <div style={{ flex: 1, width: '30%', alignSelf: 'center', padding: 100 }}>
