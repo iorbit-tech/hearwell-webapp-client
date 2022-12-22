@@ -93,11 +93,11 @@ const ChatScreen = ({ user, closeChat, chatList, getChatList, userId }) => {
 
     return (
         <div style={{ position: 'absolute', top: '70%', right: 50 }}>
-            <div style={{ backgroundColor: '#fff', height: 300, width: 400, }}>
+            <div style={{ backgroundColor: '#51b3ff08', height: 300, width: 400, }}>
                 <div onClick={() => closeChat()} style={{ float: 'right', margin: 10 }}>
-                    <button style={{ fontWeight: 'bold' }}>X</button>
+                    <button style={{ fontWeight: 'bold', borderColor: '#ffffff00' }}>X</button>
                 </div>
-                <div style={{ backgroundColor: '#9E7BF9', height: 50, paddingLeft: 20, paddingBlock: 10 }}   >
+                <div className="appBar" style={{ height: 50, paddingLeft: 20, paddingBlock: 10 }}   >
                     <p style={{ fontWeight: 'bold' }}>Chat with {user}</p>
                 </div>
                 <div style={{ height: 200, overflow: 'auto', }}>

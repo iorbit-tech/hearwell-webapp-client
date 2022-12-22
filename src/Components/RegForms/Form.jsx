@@ -109,7 +109,7 @@ export default function RegForm() {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <Avatar className="appBar" sx={{ m: 1 }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
@@ -133,7 +133,7 @@ export default function RegForm() {
                       id="page-select"
                       //value={page}
                       label="Page"
-                      //onChange={handlePageChange}
+                    //onChange={handlePageChange}
                     >
                       <MenuItem value={"admin"}>Admin</MenuItem>
                       <MenuItem value={"expert"}>Expert</MenuItem>
@@ -152,7 +152,7 @@ export default function RegForm() {
                     autoFocus
                     error={false}
                     onChange={(e) => onChangeHanddle(e)}
-                    // helperText={error}
+                  // helperText={error}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -194,23 +194,25 @@ export default function RegForm() {
 
                 <Grid item xs={6}>
                   <Button
+                    className='button'
                     type="submit"
                     fullWidth
                     variant="contained"
-                    sx={{ mt: 3, mb: 2, backgroundColor: "#9a34e3" }}
+                    sx={{ mt: 3, mb: 2, }}
                   >
                     Register
                   </Button>
                 </Grid>
                 <Grid item xs={6}>
                   <Button
-                  onClick={()=>{
-                    setSnak(true)
-                  }}
+                    className='button'
+                    onClick={() => {
+                      setSnak(true)
+                    }}
                     //type="submit"
                     fullWidth
                     variant="contained"
-                    sx={{ mt: 3, mb: 2, backgroundColor: "#9a34e3" }}
+                    sx={{ mt: 3, mb: 2, }}
                   >
                     Cancel
                   </Button>

@@ -276,19 +276,21 @@ const AddQuestions = () => {
 
                   <Grid item xs={6}>
                     <Button
+                      className="button"
                       type="submit"
                       fullWidth
                       variant="contained"
-                      sx={{ mt: 3, mb: 2, backgroundColor: "#9a34e3" }}
+                      sx={{ mt: 3, mb: 2, }}
                     >
                       {questionsData == (undefined || '') ? <span>Save</span> : <span>Update</span>}
                     </Button>
                   </Grid>
                   <Grid item xs={6}>
                     <Button
+                      className="button"
                       fullWidth
                       variant="contained"
-                      sx={{ mt: 3, mb: 2, backgroundColor: "#9a34e3" }}
+                      sx={{ mt: 3, mb: 2, }}
                     >
                       Cancel
                     </Button>

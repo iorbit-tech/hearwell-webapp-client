@@ -28,6 +28,7 @@ import {
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import MoreIcon from "@mui/icons-material/More";
+import '../../assets/Style/index.scss'
 
 const drawerWidth = 240;
 
@@ -82,7 +83,7 @@ export default function DashBoard() {
   const sideBarData = [
     {
       text: "Add Qns",
-      icon: <AddCommentIcon style={{ color: "#9a34e3" }} />,
+      icon: <AddCommentIcon className='iCons' />,
       nav: "addquestions",
     },
     // {
@@ -92,22 +93,22 @@ export default function DashBoard() {
     // },
     {
       text: "Chat",
-      icon: <ChatBubbleOutlineOutlined style={{ color: "#9a34e3" }} />,
+      icon: <ChatBubbleOutlineOutlined className='iCons' />,
       nav: "chat",
     },
     {
       text: "All Questions",
-      icon: <QuestionAnswerIcon style={{ color: "#9a34e3" }} />,
+      icon: <QuestionAnswerIcon className='iCons' />,
       nav: "allquestions",
     },
     {
       text: "User Register",
-      icon: <SupervisedUserCircle style={{ color: "#9a34e3" }} />,
+      icon: <SupervisedUserCircle className='iCons' />,
       nav: "register",
     },
     {
       text: "Select User",
-      icon: <SupervisedUserCircle style={{ color: "#9a34e3" }} />,
+      icon: <SupervisedUserCircle className='iCons' />,
       nav: "SelectUsers",
     },
   ];
@@ -126,12 +127,12 @@ export default function DashBoard() {
   const handleClick = (nav) => {
     console.log(nav);
     navigate(nav);
-   
+
   };
 
   const logout = () => {
     console.log("log out");
-    localStorage.setItem("authToken",null );
+    localStorage.setItem("authToken", null);
     localStorage.setItem("userData", null);
     navigate("/login")
   }
@@ -140,9 +141,10 @@ export default function DashBoard() {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar
+        className='appBar'
         position="fixed"
         open={open}
-        style={{ backgroundColor: "#9a34e3" }}
+      // style={{ backgroundColor: 'red' }}
       >
         <Toolbar>
           <IconButton
@@ -154,17 +156,17 @@ export default function DashBoard() {
           >
             <MenuIcon />
           </IconButton>
-          <div style={{width:"100%",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+          <div style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <Typography variant="h6" noWrap component="div">
               Hearwell
             </Typography>
             <IconButton
-            onClick={logout}
+              onClick={logout}
               color="inherit"
-              // aria-label="open drawer"
-              // onClick={handleDrawerOpen}
-              // edge="start"
-              // sx={{ mr: 2, ...(open && { display: "none" }) }}
+            // aria-label="open drawer"
+            // onClick={handleDrawerOpen}
+            // edge="start"
+            // sx={{ mr: 2, ...(open && { display: "none" }) }}
             >
               <LogoutRounded />
             </IconButton>
@@ -205,7 +207,7 @@ export default function DashBoard() {
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText
                   primary={item.text}
-                  style={{ color: "#9a34e3" }}
+                  style={{ color: "#51B3FF" }}
                 />
               </ListItemButton>
             </ListItem>

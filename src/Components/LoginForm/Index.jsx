@@ -14,7 +14,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { baseUrl, postApi } from "../../Webservice/Webservice";
 import axios from "axios";
-import { useNavigate ,Link} from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 // import { firebase } from "../../firebase/config";
 import app, { signInWithGoogle } from "../../firebase/googleSignIn";
@@ -30,7 +30,7 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <Link className="link" color="inherit" href="https://mui.com/">
         Your Website
       </Link>{" "}
       {new Date().getFullYear()}
@@ -114,7 +114,7 @@ export default function Login() {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <Avatar className="appBar" sx={{ m: 1 }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
@@ -177,17 +177,18 @@ export default function Login() {
               </Button> */}
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Link className="link" href="#" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  
+
                   <Link
+                    className="link"
                     to={"/signup"}
-                    //  onClick={()=>{
-                    //   nav("/signup")
-                    // }}
+                  //  onClick={()=>{
+                  //   nav("/signup")
+                  // }}
                   >
                     {"Don't have an account? Sign Up"}
                   </Link>
