@@ -44,7 +44,7 @@ const QuestionsDisplay = () => {
     return (
         <div className="container" style={{ width: '100%', height: '100%', backgroundColor: '#0000' }}>
             <div>
-                <Table striped bordered hover className="userTable" style={{ width: '80%', }}>
+                <Table striped bordered hover className="userTable" style={{ width: '80%', marginTop: 100 }}>
                     <thead >
                         <td style={{ textAlign: 'center', fontSize: 25, fontWeight: 'bold' }} colspan='11'>Tellus</td>
                     </thead>
@@ -68,6 +68,7 @@ const QuestionsDisplay = () => {
                     </tbody>
                 </Table>
             </div >
+            <hr style={{ position: 'relative', right: '10%', marginTop: 100, marginBottom: 100, border: '5px solid #f3f3f3', width: '50%' }}></hr>
             <div>
                 <Table striped bordered hover className="userTable" style={{ width: '80%' }}>
                     <thead >

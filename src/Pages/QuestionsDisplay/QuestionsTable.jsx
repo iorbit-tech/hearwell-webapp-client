@@ -1,7 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+
 import { deleteApi, getApi } from "../../Webservice/Webservice";
 import "../LoginScreen/Index.scss";
+import Edit_Icon from '../../assets/edit_icon.png'
+import Delete_Icon from '../../assets/delete_icon.png'
+
 
 const QuestionsTable = ({ item, getQuestions, getHearingQuestions }) => {
     console.log(item, 'item1')
@@ -35,8 +39,14 @@ const QuestionsTable = ({ item, getQuestions, getHearingQuestions }) => {
                     </span>
                 })}
             </td>
-            <td onClick={() => navigate('/editquestion/' + item.questionId)} style={{ fontWeight: '500', cursor: 'pointer', width: '4%' }} >Edit</td>
-            <td onClick={() => deleteQuestion(item.questionId)} style={{ fontWeight: '400', cursor: 'pointer', width: '4%' }} >Delete</td>
+            <td style={{ width: '2%' }}>
+                <span onClick={() => navigate('/editquestion/' + item.questionId)} style={{ fontWeight: '500', cursor: 'pointer', marginRight: 10 }} >
+                    <img src={Edit_Icon} style={{}} width="30" />
+                </span>
+                <span onClick={() => deleteQuestion(item.questionId)} style={{ fontWeight: '400', cursor: 'pointer', }} >
+                    <img src={Delete_Icon} style={{}} width="30" />
+                </span>
+            </td>
         </tr >
     )
 };
