@@ -77,7 +77,7 @@ const Chat = ({ props }) => {
       <MessageTable
         usersList={usersList}
         chatReply={chatReply}
-        // getHearingAns={getHearingAns}
+      // getHearingAns={getHearingAns}
       />
       {/* <Table striped bordered hover className="userTable">
         <thead>
