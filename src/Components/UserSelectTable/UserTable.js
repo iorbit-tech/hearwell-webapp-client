@@ -56,10 +56,8 @@ const row = [
   createData("Nigeria", "NG", 200962417, 923768),
   createData("Brazil", "BR", 210147125, 8515767),
 ];
-//console.log(rows, "default data");
 export default function UserTable({ usersList, getTellusAns, getHearingAns }) {
   // const rows = usersList;
-  console.log(usersList, "drom data table");
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setRows] = React.useState(usersList);

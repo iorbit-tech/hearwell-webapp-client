@@ -17,8 +17,6 @@ const ChatScreen = ({ user, closeChat, chatList, getChatList, userId }) => {
     const forceUpdate = useForceUpdate()
     let clearRef = () => { }
 
-    console.log(chatList, 'messageListArray');
-    console.log(messageListArray, 'messageListArray1');
     useEffect(() => {
         if (currentText != '') {
             let Addmtype = inputReferance.current.value || token();
@@ -29,8 +27,6 @@ const ChatScreen = ({ user, closeChat, chatList, getChatList, userId }) => {
             submitChat(currentText);
         }
     }, [currentText]);
-
-    console.log(userData.userId, 'userData');
 
     async function submitChat(currentText) {
         const submitMessage = {
