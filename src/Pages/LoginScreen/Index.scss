@@ -64,7 +64,26 @@
         position: sticky;
         left: 0;
         z-index: 2;
-        background-color: #fff;
+        background-color: #51b3ff;
+        box-shadow: #0000002b 0px -23px 25px 0px inset,
+            #00b8ff26 0px -36px 30px 0px inset,
+            #51b3ff 0px -79px 40px 0px inset,
+            #0000000f 0px 2px 1px,
+            #51b3ff 0px 4px 2px,
+            #00000017 0px 8px 4px,
+            #39a0aa30 0px 16px 8px,
+            #00000017 0px 32px 16px
+    }
+
+    .userTable .thFirst {
+        box-shadow: #0000002b 0px -23px 25px 0px inset,
+            #00b8ff26 0px -36px 30px 0px inset,
+            #51b3ff 0px -79px 40px 0px inset,
+            #0000000f 0px 2px 1px,
+            #51b3ff 0px 4px 2px,
+            #00000017 0px 8px 4px,
+            #39a0aa30 0px 16px 8px,
+            #00000017 0px 32px 16px
     }
 
     // th.thFirst:after {
@@ -123,7 +142,16 @@
     }
 
     .userHeadRow {
-        border-bottom: 2px solid rgb(83, 83, 83);
+        // border-bottom: 2px solid rgb(83, 83, 83);
+        background-color: #51b3ff;
+        box-shadow: #0000002b 0px -23px 25px 0px inset,
+            #00b8ff26 0px -36px 30px 0px inset,
+            #51b3ff 0px -79px 40px 0px inset,
+            #0000000f 0px 2px 1px,
+            #51b3ff 0px 4px 2px,
+            #00000017 0px 8px 4px,
+            #39a0aa30 0px 16px 8px,
+            #00000017 0px 32px 16px
     }
 
     .usertBodyRow {

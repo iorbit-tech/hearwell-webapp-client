@@ -30,15 +30,14 @@ const HearingDiary = () => {
         <div style={{ width: '100%', height: '100%', backgroundColor: '#0000' }} className="container">
             <div style={{ flex: 1, padding: 100, alignSelf: 'center' }}>
                 <div style={{ alignSelf: 'center' }}>
-                    <h3 style={{ textAlign: 'center' }}>HearingDiary</h3>
-                    <h3 style={{ textAlign: 'center' }}> {username}</h3>
+                    <h2 style={{ textAlign: 'center' }}>HearingDiary - {username}</h2>
                 </div>
                 <div style={{ display: 'flex', overflow: 'auto', width: 1000 }}>
                     <Paper sx={{ width: "100%" }}>
                         <Table striped bordered hover className="userTable" style={{ width: '80%', }}>
                             <thead>
                                 <tr className="userHeadRow">
-                                    <th className="thFirst" style={{ position: 'sticky', left: 0, zIndex: 1000, backgroundColor: '#fff' }}>Order No</th>
+                                    <th className="thFirst" style={{ position: 'sticky', left: 0, zIndex: 1000, backgroundColor: '#51b3ff' }}>Order No</th>
                                     {/* <th>Ans Type</th> */}
                                     <th className="thSecond">Question</th>
                                     <th style={{
