@@ -26,12 +26,14 @@ export function Answers({ id }) {
         <div>
             {
                 ansData.length > 0 && (
-                    ansData.map((item) => {
+                    ansData.map((item, index) => {
                         return (
-                            <div>
+                            <div key={index}>
                                 <span>{item}</span>
                                 <br></br>
-                                <hr></hr>
+                                {ansData.length > 1 &&
+                                    < hr style={{ borderColor: '#ffffff80', width: 60 }} ></hr>
+                                }
                             </div>
                         )
                     })

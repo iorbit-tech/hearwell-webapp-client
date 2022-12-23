@@ -9,7 +9,6 @@ import { compare } from "../../Components/utills";
 const QuestionsDisplay = () => {
     const [tellusQuestions, setTellusQuestions] = useState([]);
     const [hearingQuestions, setHearingQuestions] = useState([]);
-    console.log(tellusQuestions);
 
     useEffect(() => {
         getTellusQuestions();
@@ -37,20 +36,19 @@ const QuestionsDisplay = () => {
                 console.log(error);
             });
     }
-
     tellusQuestions.sort(compare);
     hearingQuestions.sort(compare);
 
     return (
         <div className="container" style={{ width: '100%', height: '100%', backgroundColor: '#0000' }}>
             <div>
-                <Table striped bordered hover className="userTable" style={{ width: '80%', }}>
+                <Table striped bordered hover className="userTable" style={{ width: '80%', marginTop: 100 }}>
                     <thead >
                         <td style={{ textAlign: 'center', fontSize: 25, fontWeight: 'bold' }} colspan='11'>Tellus</td>
                     </thead>
                     <thead>
                         <tr className="userHeadRow">
-                            <th>Select</th>
+                            {/* <th>Select</th> */}
                             <th>Page Name</th>
                             <th>Order No</th>
                             <th>Ans Type</th>
@@ -62,12 +60,13 @@ const QuestionsDisplay = () => {
                     <tbody>
                         {tellusQuestions.map(item => {
                             return (
-                                <QuestionsTable item={item} getQuestions={getTellusQuestions} />
+                                <QuestionsTable item={item} getQuestions={getTellusQuestions} key={item.questionId} />
                             )
                         })}
                     </tbody>
                 </Table>
             </div >
+            <hr style={{ position: 'relative', right: '10%', marginTop: 100, marginBottom: 100, border: '5px solid #f3f3f3', width: '50%' }}></hr>
             <div>
                 <Table striped bordered hover className="userTable" style={{ width: '80%' }}>
                     <thead >
@@ -75,7 +74,7 @@ const QuestionsDisplay = () => {
                     </thead>
                     <thead>
                         <tr className="userHeadRow">
-                            <th>Select</th>
+                            {/* <th>Select</th> */}
                             <th>Page Name</th>
                             <th>Order No</th>
                             <th>Ans Type</th>
@@ -87,7 +86,7 @@ const QuestionsDisplay = () => {
                     <tbody>
                         {hearingQuestions.map(item => {
                             return (
-                                <QuestionsTable item={item} getQuestions={getHearingQuestions} />
+                                <QuestionsTable item={item} getQuestions={getHearingQuestions} key={item.questionId} />
                             )
                         })}
                     </tbody>

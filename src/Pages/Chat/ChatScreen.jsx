@@ -17,8 +17,6 @@ const ChatScreen = ({ user, closeChat, chatList, getChatList, userId }) => {
     const forceUpdate = useForceUpdate()
     let clearRef = () => { }
 
-    console.log(chatList, 'messageListArray');
-
     useEffect(() => {
         if (currentText != '') {
             let Addmtype = inputReferance.current.value || token();
@@ -27,11 +25,8 @@ const ChatScreen = ({ user, closeChat, chatList, getChatList, userId }) => {
             setMessageListArray([...messageListArray, randomMessage(Addmtype),])
             console.log(currentText, 'randomMessage');
             submitChat(currentText);
-            getChatList();
         }
     }, [currentText]);
-
-    console.log(userData.userId, 'userData');
 
     async function submitChat(currentText) {
         const submitMessage = {
@@ -41,6 +36,8 @@ const ChatScreen = ({ user, closeChat, chatList, getChatList, userId }) => {
 
         await postApiCall("/api/chat/", submitMessage)
             .then(res => {
+                getChatList();
+                setCurrentText('');
             })
             .catch(error => {
                 console.log(error);

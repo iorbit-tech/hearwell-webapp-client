@@ -12,14 +12,12 @@ const SelectUsers = ({ props }) => {
   const nav = useNavigate();
 
   const getTellusAns = (username, id) => {
-    console.log(id, "id");
     setTellusClicked(1);
     setUser(username);
     localStorage.setItem("UserId", id);
   };
 
   const getHearingAns = (username, id) => {
-    console.log(id, "id");
     setHearingClicked(1);
     setUser(username);
     localStorage.setItem("UserId", id);
@@ -33,7 +31,6 @@ const SelectUsers = ({ props }) => {
     return await getApi("/api/user")
       .then((res) => {
         setUsersList(res.data);
-        console.log(res.data, "res_getUsersList");
       })
       .catch((error) => {
         console.log(error);

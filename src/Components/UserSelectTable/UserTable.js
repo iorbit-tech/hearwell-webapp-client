@@ -56,10 +56,8 @@ const row = [
   createData("Nigeria", "NG", 200962417, 923768),
   createData("Brazil", "BR", 210147125, 8515767),
 ];
-//console.log(rows, "default data");
 export default function UserTable({ usersList, getTellusAns, getHearingAns }) {
   // const rows = usersList;
-  console.log(usersList, "drom data table");
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setRows] = React.useState(usersList);
@@ -79,9 +77,9 @@ export default function UserTable({ usersList, getTellusAns, getHearingAns }) {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
+              {columns.map((column, index) => (
                 <TableCell
-                  key={column.id}
+                  key={index}
                   align={column.align}
                   style={{
                     minWidth: column.minWidth,
@@ -98,11 +96,11 @@ export default function UserTable({ usersList, getTellusAns, getHearingAns }) {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, index) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column) => {
+                  <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                    {columns.map((column, index) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell key={index} align={column.align}>
                           {column.id == "id" ? (
                             index + 1
                           ) : column.id == "tellus" ? (

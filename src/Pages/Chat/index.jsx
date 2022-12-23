@@ -15,7 +15,6 @@ const Chat = ({ props }) => {
   let updatedChatList = [];
 
   const chatReply = (username, id) => {
-    console.log(id, "id");
     setChatClicked(1);
     setUser(username);
     setUserId(id);
@@ -31,11 +30,9 @@ const Chat = ({ props }) => {
   }, [userId]);
 
   const getChatList = async () => {
-    console.log(userData, "userData");
     return await getApi("/api/chat/" + userId)
       .then((res) => {
         res.data.map((item, i) => {
-          console.log(item, "res.data.map");
           updatedChatList[i] = {
             // item,
             text: item.message,
@@ -53,7 +50,6 @@ const Chat = ({ props }) => {
           };
         });
         setChatList(updatedChatList);
-        console.log(updatedChatList, "chatList");
       })
       .catch((error) => {
         console.log(error);
@@ -64,20 +60,18 @@ const Chat = ({ props }) => {
     return await getApi("/api/user")
       .then((res) => {
         setUsersList(res.data);
-        console.log(res.data, "res_getUsersList");
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  console.log(userId, "usersList");
   return (
     <div style={{ marginTop: 64 }}>
       <MessageTable
         usersList={usersList}
         chatReply={chatReply}
-        // getHearingAns={getHearingAns}
+      // getHearingAns={getHearingAns}
       />
       {/* <Table striped bordered hover className="userTable">
         <thead>
