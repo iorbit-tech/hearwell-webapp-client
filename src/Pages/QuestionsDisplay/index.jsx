@@ -9,7 +9,6 @@ import { compare } from "../../Components/utills";
 const QuestionsDisplay = () => {
     const [tellusQuestions, setTellusQuestions] = useState([]);
     const [hearingQuestions, setHearingQuestions] = useState([]);
-    console.log(tellusQuestions);
 
     useEffect(() => {
         getTellusQuestions();
@@ -37,7 +36,6 @@ const QuestionsDisplay = () => {
                 console.log(error);
             });
     }
-
     tellusQuestions.sort(compare);
     hearingQuestions.sort(compare);
 
@@ -62,7 +60,7 @@ const QuestionsDisplay = () => {
                     <tbody>
                         {tellusQuestions.map(item => {
                             return (
-                                <QuestionsTable item={item} getQuestions={getTellusQuestions} />
+                                <QuestionsTable item={item} getQuestions={getTellusQuestions} key={item.questionId} />
                             )
                         })}
                     </tbody>
@@ -88,7 +86,7 @@ const QuestionsDisplay = () => {
                     <tbody>
                         {hearingQuestions.map(item => {
                             return (
-                                <QuestionsTable item={item} getQuestions={getHearingQuestions} />
+                                <QuestionsTable item={item} getQuestions={getHearingQuestions} key={item.questionId} />
                             )
                         })}
                     </tbody>

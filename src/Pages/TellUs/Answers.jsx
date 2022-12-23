@@ -28,7 +28,7 @@ export function Answers({ id }) {
                 ansData.length > 0 && (
                     ansData.map((item, index) => {
                         return (
-                            <div>
+                            <div key={index}>
                                 <span>{item}</span>
                                 <br></br>
                                 {ansData.length > 1 &&

@@ -32,7 +32,7 @@ export function Answers({ id, index }) {
                         var date = timeStr.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
                         var Time = timeStr.toLocaleTimeString();
                         return (
-                            <td style={{ width: 150, minHeight: 150, border: 'none', }} >
+                            <td style={{ width: 150, minHeight: 150, border: 'none', }} key={item.answerId}>
                                 <div>
                                     {
                                         ansData.length > 0 && index == 0 && (
@@ -45,9 +45,9 @@ export function Answers({ id, index }) {
                                         )
                                     }
                                 </div>
-                                {item.options.map((finalData) => {
+                                {item.options.map((finalData, index) => {
                                     return (
-                                        <div style={{ width: '100%', alignItems: 'center' }}>
+                                        <div style={{ width: '100%', alignItems: 'center' }} key={index}>
                                             <span style={{ padding: 10, alignItems: 'center' }}>{finalData}</span>
                                             <br></br>
                                             {item.options.length > 1 &&

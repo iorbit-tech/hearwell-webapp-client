@@ -49,9 +49,8 @@ const Tellus = () => {
                         </thead>
                         <tbody>
                             {tellusQuestions.map(item => {
-
                                 return (
-                                    <tr className="usertBodyRow" align="center">
+                                    <tr className="usertBodyRow" align="center" key={item.questionId}>
                                         <td style={{ minWidth: '5%' }}>{item.order}</td>
                                         <td style={{ width: '8%' }} >{item.answerType}</td>
                                         <td style={{ minWidth: '20vw', }} >{item.question}</td>

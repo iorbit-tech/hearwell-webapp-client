@@ -48,7 +48,7 @@ const HearingDiary = () => {
                             <tbody>
                                 {hearingQuestions.map((item, index) => {
                                     return (
-                                        <tr className="usertBodyRow" align="center">
+                                        <tr className="usertBodyRow" align="center" key={index}>
                                             <td className="tdFirst" style={{ width: '2%', position: 'sticky', left: 0, zIndex: 1000, backgroundColor: '#fff' }}>{item.order}</td>
                                             {/* <td style={{ fontWeight: '500', width: '8%' }} >{item.answerType}</td> */}
                                             <td className="tdSecond" style={{ fontWeight: '400', width: '22%', paddingLeft: 50, minWidth: '300px' }} >{item.question}</td>

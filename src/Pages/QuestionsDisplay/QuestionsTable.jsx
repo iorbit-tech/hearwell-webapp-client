@@ -8,7 +8,6 @@ import Delete_Icon from '../../assets/delete_icon.png'
 
 
 const QuestionsTable = ({ item, getQuestions, getHearingQuestions }) => {
-    console.log(item, 'item1')
     const navigate = useNavigate();
 
     async function deleteQuestion(questionId) {
@@ -32,7 +31,7 @@ const QuestionsTable = ({ item, getQuestions, getHearingQuestions }) => {
             <td style={{ fontWeight: '400', width: '22%', padding: 0 }} >{item.question}</td>
             <td style={{ fontWeight: '400', width: '10%' }} >
                 {item.options.map((option, index) => {
-                    return <span>{option} <br></br>
+                    return <span key={index}>{option} <br></br>
                         {item.options.length > 1 &&
                             < hr style={{ borderColor: '#ffffff80', width: 60 }} ></hr>
                         }
@@ -41,10 +40,10 @@ const QuestionsTable = ({ item, getQuestions, getHearingQuestions }) => {
             </td>
             <td style={{ width: '2%' }}>
                 <span onClick={() => navigate('/editquestion/' + item.questionId)} style={{ fontWeight: '500', cursor: 'pointer', marginRight: 10 }} >
-                    <img src={Edit_Icon} style={{}} width="30" />
+                    <img src={Edit_Icon} width="30" />
                 </span>
                 <span onClick={() => deleteQuestion(item.questionId)} style={{ fontWeight: '400', cursor: 'pointer', }} >
-                    <img src={Delete_Icon} style={{}} width="30" />
+                    <img src={Delete_Icon} width="30" />
                 </span>
             </td>
         </tr >
