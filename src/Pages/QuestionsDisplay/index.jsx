@@ -50,7 +50,7 @@ const QuestionsDisplay = () => {
                     </thead>
                     <thead>
                         <tr className="userHeadRow">
-                            <th>Select</th>
+                            {/* <th>Select</th> */}
                             <th>Page Name</th>
                             <th>Order No</th>
                             <th>Ans Type</th>
@@ -75,7 +75,7 @@ const QuestionsDisplay = () => {
                     </thead>
                     <thead>
                         <tr className="userHeadRow">
-                            <th>Select</th>
+                            {/* <th>Select</th> */}
                             <th>Page Name</th>
                             <th>Order No</th>
                             <th>Ans Type</th>
