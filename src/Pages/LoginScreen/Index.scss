@@ -120,7 +120,7 @@
     .userTable tbody .tdSecond {
         position: sticky;
         left: 0;
-        z-index: 999;
+        z-index: 999 !important;
         background-color: #fff;
     }
 
@@ -146,13 +146,12 @@
 
     .usertBodyRow {
         border-bottom: 1px solid rgb(207, 207, 207);
-        // color: #404040;
-        // font-family: georgia;
-        // font-weight: 500;
     }
 
     .userTable td:nth-child(2n+2) {
         background: aliceblue;
+        z-index: -1;
+        position: sticky;
     }
 
     table.even {
