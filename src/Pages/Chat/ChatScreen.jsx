@@ -7,16 +7,61 @@ import InputField from "./InputField";
 import SendButton from "./SendButton";
 import { postApi, postApiCall } from "../../Webservice/Webservice";
 import { userData } from "../../utils/authChecker";
+import { io } from "socket.io-client";
 
 const ChatScreen = ({ user, closeChat, chatList, getChatList, userId }) => {
     const [messageListArray, setMessageListArray] = useState([]);
     const [currentText, setCurrentText] = useState('');
+    const [socketConnected, setSocketConnected] = useState(false);
     const [status, setStatus] = useState('');
+    const [socketRes, setSocketRes] = useState('');
     const messageListReferance = useRef();
     const inputReferance = useRef();
     const forceUpdate = useForceUpdate()
     let clearRef = () => { }
+    // var socket = io('http://localhost:8000');
+    console.log(socketRes, 'socketRes')
+    const socket = io('ws://localhost:8000', {
+        transports: ['websocket'],
+        secure: true,
+        jsonp: false
+    });
 
+
+    useEffect(() => {
+        // socket = io('http://localhost:8000');
+        console.log(userData[0].userId, 'userData.userId')
+        socket.emit("setup", userData[0].userId);
+        socket.on("connection", () => setSocketConnected(true));
+        socket.emit("join chat", userId);
+
+        //////
+        // socket.connect();
+        // socket.on('connect', () => {
+        //     console.log('connected to socket server');
+        // });
+        ////
+    }, []);
+
+    useEffect(() => {
+
+        socket.on("message received", (newMessageReceived) => {
+            // if (!newMessageReceived) {
+
+            // }
+            // else {
+            console.log(newMessageReceived, 'newMessageReceived')
+            // getChatList();
+            setMessageListArray([...messageListArray, newMessageReceived])
+            // }
+        });
+    },);
+
+    useEffect(() => {
+        getChatList();
+    }, [messageListArray]);
+
+    console.log(userData.userId)
     useEffect(() => {
         if (currentText != '') {
             let Addmtype = inputReferance.current.value || token();
@@ -28,12 +73,11 @@ const ChatScreen = ({ user, closeChat, chatList, getChatList, userId }) => {
         }
     }, [currentText]);
 
-    async function submitChat(currentText) {
+    const submitChat = async (currentText) => {
         const submitMessage = {
             subject: "Expert", message: currentText, sentTime: new Date(),
             senderId: userData.userId, receiverId: userId, //need to handle Userid
         }
-
         await postApiCall("/api/chat/", submitMessage)
             .then(res => {
                 getChatList();
@@ -42,6 +86,7 @@ const ChatScreen = ({ user, closeChat, chatList, getChatList, userId }) => {
             .catch(error => {
                 console.log(error);
             });
+        socket.emit("new message", submitMessage);
     }
 
     const addMessage = (data) => {
@@ -94,6 +139,7 @@ const ChatScreen = ({ user, closeChat, chatList, getChatList, userId }) => {
                 <div onClick={() => closeChat()} style={{ float: 'right', margin: 10 }}>
                     <button style={{ fontWeight: 'bold', borderColor: '#ffffff00' }}>X</button>
                 </div>
+                {socketRes === 'new' && <p>new</p>}
                 <div className="appBar" style={{ height: 50, paddingLeft: 20, paddingBlock: 10 }}   >
                     <p style={{ fontWeight: 'bold' }}>Chat with {user}</p>
                 </div>
