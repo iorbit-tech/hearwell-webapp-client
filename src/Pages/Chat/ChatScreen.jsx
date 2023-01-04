@@ -14,14 +14,14 @@ const ChatScreen = ({ user, closeChat, chatList, getChatList, userId }) => {
     const [currentText, setCurrentText] = useState('');
     const [socketConnected, setSocketConnected] = useState(false);
     const [status, setStatus] = useState('');
+    const [msgState, setMsgState] = useState(0);
     const [socketRes, setSocketRes] = useState('');
     const messageListReferance = useRef();
     const inputReferance = useRef();
     const forceUpdate = useForceUpdate()
     let clearRef = () => { }
-    // var socket = io('http://localhost:8000');
-    console.log(socketRes, 'socketRes')
-    const socket = io('ws://localhost:8000', {
+
+    const socket = io('ws://localhost:8000/', {
         transports: ['websocket'],
         secure: true,
         jsonp: false
@@ -30,38 +30,28 @@ const ChatScreen = ({ user, closeChat, chatList, getChatList, userId }) => {
 
     useEffect(() => {
         // socket = io('http://localhost:8000');
-        console.log(userData[0].userId, 'userData.userId')
-        socket.emit("setup", userData[0].userId);
+        console.log(userData.userId, 'userData.userId')
+        socket.emit("setup", userData.userId);
         socket.on("connection", () => setSocketConnected(true));
         socket.emit("join chat", userId);
 
-        //////
-        // socket.connect();
-        // socket.on('connect', () => {
-        //     console.log('connected to socket server');
-        // });
-        ////
     }, []);
-
+    console.log(chatList, 'chatList')
     useEffect(() => {
 
-        socket.on("message received", (newMessageReceived) => {
+        socket.on("Web message received", (newMessageReceived) => {
             // if (!newMessageReceived) {
 
             // }
             // else {
             console.log(newMessageReceived, 'newMessageReceived')
-            // getChatList();
-            setMessageListArray([...messageListArray, newMessageReceived])
+            // setMessageListArray([...messageListArray, newMessageReceived])
+            getChatList();
             // }
         });
-    },);
+    }, []);
 
-    useEffect(() => {
-        getChatList();
-    }, [messageListArray]);
 
-    console.log(userData.userId)
     useEffect(() => {
         if (currentText != '') {
             let Addmtype = inputReferance.current.value || token();
@@ -87,6 +77,8 @@ const ChatScreen = ({ user, closeChat, chatList, getChatList, userId }) => {
                 console.log(error);
             });
         socket.emit("new message", submitMessage);
+        getChatList();
+        setMsgState(1);
     }
 
     const addMessage = (data) => {

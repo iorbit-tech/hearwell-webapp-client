@@ -33,7 +33,7 @@ const Chat = ({ props }) => {
     return await getApi("/api/chat/" + userId)
       .then((res) => {
         res.data.map((item, i) => {
-          console.log(item, 'getChatList')
+          // console.log(item, 'getChatList')
           updatedChatList[i] = {
             // item,
             text: item.message,
