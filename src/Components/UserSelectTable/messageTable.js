@@ -36,7 +36,7 @@ const columns = [
 
 
 //console.log(rows, "default data");
-export default function MessageTable({ usersList, chatReply, getHearingAns }) {
+export default function MessageTable({ usersList, chatReply, socket, getHearingAns, newMessage }) {
   // const rows = usersList;
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -99,7 +99,6 @@ export default function MessageTable({ usersList, chatReply, getHearingAns }) {
                                 getHearingAns(row.userName, row.userId)
                               }
                             >
-                              DELETE
                             </div>
                           ) : (
                             value

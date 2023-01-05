@@ -7,12 +7,10 @@ import InputField from "./InputField";
 import SendButton from "./SendButton";
 import { postApi, postApiCall } from "../../Webservice/Webservice";
 import { userData } from "../../utils/authChecker";
-import { io } from "socket.io-client";
 
-const ChatScreen = ({ user, closeChat, chatList, getChatList, userId }) => {
+const ChatScreen = ({ user, socket, closeChat, chatList, getChatList, userId }) => {
     const [messageListArray, setMessageListArray] = useState([]);
     const [currentText, setCurrentText] = useState('');
-    const [socketConnected, setSocketConnected] = useState(false);
     const [status, setStatus] = useState('');
     const [msgState, setMsgState] = useState(0);
     const [socketRes, setSocketRes] = useState('');
@@ -21,35 +19,21 @@ const ChatScreen = ({ user, closeChat, chatList, getChatList, userId }) => {
     const forceUpdate = useForceUpdate()
     let clearRef = () => { }
 
-    const socket = io('ws://localhost:8000/', {
-        transports: ['websocket'],
-        secure: true,
-        jsonp: false
-    });
-
-
-    useEffect(() => {
-        // socket = io('http://localhost:8000');
-        console.log(userData.userId, 'userData.userId')
-        socket.emit("setup", userData.userId);
-        socket.on("connection", () => setSocketConnected(true));
-        socket.emit("join chat", userId);
-
-    }, []);
     console.log(chatList, 'chatList')
-    useEffect(() => {
 
-        socket.on("Web message received", (newMessageReceived) => {
-            // if (!newMessageReceived) {
+    // useEffect(() => {
 
-            // }
-            // else {
-            console.log(newMessageReceived, 'newMessageReceived')
-            // setMessageListArray([...messageListArray, newMessageReceived])
-            getChatList();
-            // }
-        });
-    }, []);
+    //     socket.on("Web message received", (newMessageReceived) => {
+    //         // if (!newMessageReceived) {
+
+    //         // }
+    //         // else {
+    //         console.log(newMessageReceived, 'newMessageReceived1');
+    //         // setMessageListArray([...messageListArray, newMessageReceived])
+    //         getChatList();
+    //         // }
+    //     });
+    // }, []);
 
 
     useEffect(() => {
@@ -66,10 +50,11 @@ const ChatScreen = ({ user, closeChat, chatList, getChatList, userId }) => {
     const submitChat = async (currentText) => {
         const submitMessage = {
             subject: "Expert", message: currentText, sentTime: new Date(),
-            senderId: userData.userId, receiverId: userId, //need to handle Userid
+            senderId: userData.userId, receiverId: userId, status: false  //need to handle Userid
         }
         await postApiCall("/api/chat/", submitMessage)
             .then(res => {
+                console.log('c');
                 getChatList();
                 setCurrentText('');
             })
@@ -77,6 +62,7 @@ const ChatScreen = ({ user, closeChat, chatList, getChatList, userId }) => {
                 console.log(error);
             });
         socket.emit("new message", submitMessage);
+        console.log('b');
         getChatList();
         setMsgState(1);
     }

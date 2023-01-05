@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../LoginScreen/Index.scss";
 import { Table } from "@mui/material";
 import ChatScreen from "./ChatScreen";
 import { getApi } from "../../Webservice/Webservice";
 import { userData } from "../../utils/authChecker";
 import MessageTable from "../../Components/UserSelectTable/messageTable";
+import { io } from "socket.io-client";
 
 const Chat = ({ props }) => {
   const [chatClicked, setChatClicked] = useState(0);
@@ -12,7 +13,16 @@ const Chat = ({ props }) => {
   const [userId, setUserId] = useState("");
   const [chatList, setChatList] = useState([{}]);
   const [usersList, setUsersList] = useState([]);
+  const [socketConnected, setSocketConnected] = useState(false);
+
+  // console.log(userId, 'userId');
   let updatedChatList = [];
+
+  const socket = io('ws://localhost:8000/', {
+    transports: ['websocket'],
+    secure: true,
+    jsonp: false
+  });
 
   const chatReply = (username, id) => {
     setChatClicked(1);
@@ -23,13 +33,60 @@ const Chat = ({ props }) => {
   const closeChat = () => {
     setChatClicked(0);
   };
+  const isInitialMount = useRef(true);
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      // socket = io('http://localhost:8000');
+      console.log(userData.userId, 'userData.userId')
+      // socket.emit("setup", userData.userId);
+      const eventHandler = () => setSocketConnected(true);
+      // socket.once("connection", eventHandler);
+      socket.emit("join chat", userId);
+      return () => {
+        socket.off('connection', eventHandler);
+      };
+    }
+  }, []);
 
   useEffect(() => {
+    console.log(socketConnected, 'socketConnected');
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      socket.once("Web message received", (newMessageReceived) => {
+        // if (!newMessageReceived) {
+
+        getChatList();
+        // }
+        // else {
+        console.log(newMessageReceived, 'newMessageReceived');
+        // setMessageListArray([...messageListArray, newMessageReceived])
+        // }
+      });
+      return () => {
+        socket.off('Web message received', () => console.log("disconnected"));
+      };
+    }
+  }, [setSocketConnected]);
+
+  useEffect(() => {
+    console.log('a');
     getChatList();
     getUsersList();
   }, [userId]);
 
+  useEffect(() => {
+    console.log('a');
+    getChatList();
+    getUsersList();
+  }, [userId]);
+
+  var newMessage = "New Message";
+
   const getChatList = async () => {
+    console.log('getChatList')
     return await getApi("/api/chat/" + userId)
       .then((res) => {
         res.data.map((item, i) => {
@@ -72,6 +129,8 @@ const Chat = ({ props }) => {
       <MessageTable
         usersList={usersList}
         chatReply={chatReply}
+        newMessage={newMessage}
+        socket={socket}
       // getHearingAns={getHearingAns}
       />
       {/* <Table striped bordered hover className="userTable">
@@ -130,6 +189,7 @@ const Chat = ({ props }) => {
           getChatList={getChatList}
           chatList={chatList}
           closeChat={closeChat}
+          socket={socket}
         />
       )}
     </div>
