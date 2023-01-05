@@ -5,7 +5,7 @@ import AttachmentPin from '../../assets/attachment.png';
 import { MessageList } from "react-chat-elements";
 import InputField from "./InputField";
 import SendButton from "./SendButton";
-import { postApi, postApiCall } from "../../Webservice/Webservice";
+import { postApi, postApiCall, updateApi } from "../../Webservice/Webservice";
 import { userData } from "../../utils/authChecker";
 
 const ChatScreen = ({ user, closeChat, chatList, getChatList, userId }) => {
@@ -18,6 +18,10 @@ const ChatScreen = ({ user, closeChat, chatList, getChatList, userId }) => {
     let clearRef = () => { }
 
     useEffect(() => {
+        changeStatus()
+    }, [chatList]);
+
+    useEffect(() => {
         if (currentText != '') {
             let Addmtype = inputReferance.current.value || token();
             Addmtype = 'text';
@@ -27,6 +31,29 @@ const ChatScreen = ({ user, closeChat, chatList, getChatList, userId }) => {
             submitChat(currentText);
         }
     }, [currentText]);
+
+    const changeStatus = async () => {
+        console.log(chatList, 'chatList')
+        let expertId = JSON.parse(localStorage.getItem("userData"))
+        let filteredMessages = chatList.filter(item => (item.status === false && item.senderId !== expertId.userId))
+        console.log(filteredMessages, 'filteredMessages')
+        let msgId;
+        msgId = filteredMessages.map(async (ID) => {
+            await changeStatusApi(ID.messageId)
+        })
+    };
+
+    const changeStatusApi = async (id) => {
+        let data = { status: true };
+        return await updateApi("/api/chat/" + id, data)
+            .then((res) => {
+                console.log(res, 'res11')
+                // setUsersList(res.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
     async function submitChat(currentText) {
         const submitMessage = {

@@ -36,7 +36,7 @@ const columns = [
 
 
 //console.log(rows, "default data");
-export default function MessageTable({ usersList, chatReply, getHearingAns }) {
+export default function MessageTable({ usersList, chatReply, getHearingAns, msgListID }) {
   // const rows = usersList;
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -90,7 +90,7 @@ export default function MessageTable({ usersList, chatReply, getHearingAns }) {
                                 chatReply(row.userName, row.userId)
                               }
                             >
-                              Reply
+                              {msgListID.includes(row.userId) == true ? <span style={{ color: '#282828', fontWeight: 600 }}>Reply </span> : 'Reply'}
                             </div>
                           ) : column.id == "hearingdiary" ? (
                             <div
@@ -99,7 +99,8 @@ export default function MessageTable({ usersList, chatReply, getHearingAns }) {
                                 getHearingAns(row.userName, row.userId)
                               }
                             >
-                              DELETE
+                              {msgListID.includes(row.userId) == true &&
+                                <span style={{ backgroundColor: '#d5fbff', padding: 10, borderRadius: 10, color: '#4c4c4c' }}>New Message</span>}
                             </div>
                           ) : (
                             value
