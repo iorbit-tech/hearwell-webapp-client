@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../LoginScreen/Index.scss";
 import { Table } from "@mui/material";
 import ChatScreen from "./ChatScreen";
-import { getApi } from "../../Webservice/Webservice";
+import { getApi, updateApi } from "../../Webservice/Webservice";
 import { userData } from "../../utils/authChecker";
 import MessageTable from "../../Components/UserSelectTable/messageTable";
 
@@ -14,9 +14,11 @@ const Chat = ({ props }) => {
   const [usersList, setUsersList] = useState([]);
   const [msgList, setMsgList] = useState([]);
   const [msgListID, setMsgListID] = useState([]);
+  const [newMsgList, setNewMsgList] = useState([]);
+
 
   let updatedChatList = [];
-
+  console.log(chatList, 'chatList')
   const chatReply = (username, id) => {
     setChatClicked(1);
     setUser(username);
@@ -47,6 +49,7 @@ const Chat = ({ props }) => {
             text: item.message,
             title: item.senderId == userData.userId ? "You" : user,
             className: item.senderId == userData.userId ? "You" : "User",
+            status: item.status,
             copiableDate: true,
             // dateString: new Date(),
             date: item.sentTime,
@@ -55,6 +58,7 @@ const Chat = ({ props }) => {
             type: "text",
             senderId: item.senderId,
             receiverId: item.receiverId,
+            messageId: item.messageId,
             // createdAt: get(item, "sentTime", ""),
           };
         });
@@ -78,6 +82,7 @@ const Chat = ({ props }) => {
   const getUsersMessage = async () => {
     return await getApi("/api/chat/status/get")
       .then((res) => {
+        console.log(res)
         let newArray = [];
         let uniqueObject = {};
         let i;
@@ -90,7 +95,7 @@ const Chat = ({ props }) => {
         for (i in uniqueObject) {
           newArray.push(uniqueObject[i]);
         }
-
+        setNewMsgList(newArray);
         let msgListsenderId = [];
         msgListsenderId = newArray.map((msgList) => {
           return (
@@ -103,6 +108,7 @@ const Chat = ({ props }) => {
         console.log(error);
       });
   };
+
 
   return (
     <div style={{ marginTop: 64 }}>

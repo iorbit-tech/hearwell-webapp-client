@@ -90,7 +90,7 @@ export default function MessageTable({ usersList, chatReply, getHearingAns, msgL
                                 chatReply(row.userName, row.userId)
                               }
                             >
-                              {msgListID.includes(row.userId) == true ? <span style={{ color: '#81e8f3', fontWeight: 600 }}>Reply </span> : 'Reply'}
+                              {msgListID.includes(row.userId) == true ? <span style={{ color: '#282828', fontWeight: 600 }}>Reply </span> : 'Reply'}
                             </div>
                           ) : column.id == "hearingdiary" ? (
                             <div
