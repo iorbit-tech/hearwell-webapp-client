@@ -12,12 +12,17 @@ const Chat = ({ props }) => {
   const [userId, setUserId] = useState("");
   const [chatList, setChatList] = useState([{}]);
   const [usersList, setUsersList] = useState([]);
+  const [msgList, setMsgList] = useState([]);
+  const [msgListID, setMsgListID] = useState([]);
+
   let updatedChatList = [];
 
   const chatReply = (username, id) => {
     setChatClicked(1);
     setUser(username);
     setUserId(id);
+    let filteredID = msgListID.filter(item => item !== id)
+    setMsgListID(filteredID)
   };
 
   const closeChat = () => {
@@ -28,6 +33,10 @@ const Chat = ({ props }) => {
     getChatList();
     getUsersList();
   }, [userId]);
+
+  useEffect(() => {
+    getUsersMessage()
+  }, []);
 
   const getChatList = async () => {
     return await getApi("/api/chat/" + userId)
@@ -66,11 +75,41 @@ const Chat = ({ props }) => {
       });
   };
 
+  const getUsersMessage = async () => {
+    return await getApi("/api/chat/status/get")
+      .then((res) => {
+        let newArray = [];
+        let uniqueObject = {};
+        let i;
+        for (let i in res.data) {
+          let senderId;
+          senderId = res.data[i]['senderId'];
+          uniqueObject[senderId] = res.data[i];
+        }
+
+        for (i in uniqueObject) {
+          newArray.push(uniqueObject[i]);
+        }
+
+        let msgListsenderId = [];
+        msgListsenderId = newArray.map((msgList) => {
+          return (
+            msgList.senderId
+          )
+        })
+        setMsgListID(msgListsenderId);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div style={{ marginTop: 64 }}>
       <MessageTable
         usersList={usersList}
         chatReply={chatReply}
+        msgListID={msgListID}
       // getHearingAns={getHearingAns}
       />
       {/* <Table striped bordered hover className="userTable">
