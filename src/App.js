@@ -13,6 +13,7 @@ import QuestionsDisplay from "./Pages/QuestionsDisplay";
 import { userData, authToken } from "./utils/authChecker";
 import SelectUsers from "./Pages/SelectUsers";
 import HearingDiary from "./Pages/HearingDiary";
+import WAChat from "./Pages/WhatsApp";
 
 const App = () => {
   const nav = useNavigate();
@@ -45,6 +46,7 @@ const App = () => {
           <Route path="/allquestions" element={<QuestionsDisplay />} />
           <Route path="/selectUsers" element={<SelectUsers />} />
           <Route path="/hearingdiary/:username" element={<HearingDiary />} />
+          <Route path="/whatsappchat" element={<WAChat />} />
         </Route>
       </Routes>
     </div>

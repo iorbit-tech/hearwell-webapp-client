@@ -24,6 +24,7 @@ import {
   ChatBubbleOutlineOutlined,
   LogoutRounded,
   SupervisedUserCircle,
+  WhatsApp,
 } from "@mui/icons-material";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import AddCommentIcon from "@mui/icons-material/AddComment";
@@ -110,6 +111,11 @@ export default function DashBoard() {
       text: "Select User",
       icon: <SupervisedUserCircle className='iCons' />,
       nav: "SelectUsers",
+    },
+    {
+      text: "WhatsApp Chat",
+      icon: <WhatsApp className='iCons' />,
+      nav: "whatsappchat",
     },
   ];
   const [open, setOpen] = React.useState(
