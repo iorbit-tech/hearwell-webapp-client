@@ -1,162 +1,156 @@
+import * as React from "react";
+import CssBaseline from "@mui/material/CssBaseline";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { baseUrl, postApi } from "../../Webservice/Webservice";
+import { useNavigate, Link } from "react-router-dom";
+import { useEffect } from "react";
+import ChatUi from "./ChatUi";
+import { ChatList } from "react-chat-elements";
+import { MessageBox, ChatItem } from "react-chat-elements";
+import ChatListUi from "./ChatUi";
+import ChatBoxUi from "./ChatBoxUi";
+import "./style.scss";
 
-import { styled, useTheme } from "@mui/material/styles";
-import { SupervisedUserCircle, WhatsApp } from "@mui/icons-material";
-import { AppBar, Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
-import "../LoginScreen/Index.scss";
-import { getApi } from "../../Webservice/Webservice";
-import { userData } from "../../utils/authChecker";
+function Copyright(props) {
+  return (
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
+      <Link className="link" color="inherit" href="https://mui.com/">
+        Your Website
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
 
-const WAChat = () => {
-    const [chatList, setChatList] = useState([]);
-    const [usersList, setUsersList] = useState([]);
+const theme = createTheme();
 
-    useEffect(() => {
-        // getChatList();
-        getUsersList();
-    }, []);
+export default function WAchatUi() {
+  const ChatList = [
+    {
+      _id: "63b6a7582361c92085fc59fb",
+      messageId:
+        "wamid.HBgMOTE5MDc0NDc4MjY4FQIAEhggRUE3MDE1MjYwREM5RDA4ODE0RDZCMUQ3RjBDNTcxRDMA",
+      phoneNumberId: "114161568217634",
+      from: "919074478268",
+      messageBody: "Haiiii",
+      profileName: "Jb",
+      conversationId: "107060552269162",
+      status: false,
+      createdAt: "2023-01-05T10:32:56.079Z",
+      updatedAt: "2023-01-05T10:32:56.079Z",
+      __v: 0,
+    },
+    {
+      _id: "63b6a3f12361c92085fc59f9",
+      messageId:
+        "wamid.HBgMOTE3MDEyMTE1MzM1FQIAEhggRUUxRTdENEU5NDRCMkJGOTk4RDREQkExRjhENEZFQjkA",
+      phoneNumberId: "114161568217634",
+      from: "917012115335",
+      messageBody: "Gg",
+      profileName: "Athul SS",
+      conversationId: "107060552269162",
+      status: false,
+      createdAt: "2023-01-05T10:18:25.587Z",
+      updatedAt: "2023-01-05T10:18:25.587Z",
+      __v: 0,
+    },
+    {
+      _id: "63b68cf9720abf0d2776b17f",
+      messageId:
+        "wamid.HBgMOTE3MDEyMTE1MzM1FQIAEhggODc4QUNBQUQ0MjAxNEQ4OEY3REVCQUFBQ0EwRkI1OTEA",
+      phoneNumberId: "114161568217634",
+      from: "917012115335",
+      messageBody: "Edeyy",
+      profileName: "Athul SS",
+      conversationId: "107060552269162",
+      status: false,
+      createdAt: "2023-01-05T08:40:26.010Z",
+      updatedAt: "2023-01-05T08:40:26.010Z",
+      __v: 0,
+    },
+    {
+      _id: "63b6840173495c76e0c7dd4d",
+      messageId: "ajkadjk",
+      phoneNumberId: "1235456565",
+      from: "77002211555",
+      messageBody: "deyy",
+      profileName: "atul",
+      recievedTime: null,
+      conversationId: "",
+      status: false,
+      __v: 0,
+    },
+    {
+      _id: "63b68940d25af90249b4efd2",
+      messageId:
+        "wamid.HBgMOTE3MDEyMTE1MzM1FQIAEhggMUVGOTY0NzE4MTI0QThGODM4RjNCNEJGRkVENkZCRjAA",
+      phoneNumberId: "114161568217634",
+      from: "77002211555",
+      messageBody: "deyy",
+      profileName: "atul",
+      recievedTime: null,
+      conversationId: "",
+      status: false,
+      __v: 0,
+    },
+    {
+      _id: "63b68b2786d40d09ae37b90a",
+      messageId:
+        "wamid.HBgMOTE3MDEyMTE1MzM1FQIAEhggNDZGOTRCNzExOTE0QkUxNjQ0Q0JGN0ZBNERFMzYyODUA",
+      phoneNumberId: "114161568217634",
+      from: "917012115335",
+      messageBody: "Sugamano ?",
+      profileName: "Athul SS",
+      recievedTime: null,
+      conversationId: "",
+      status: false,
+      __v: 0,
+    },
+  ];
+  const [chats, setChats] = React.useState(ChatList);
+  const [selection, setSelection] = React.useState("");
+  const [selectedChat, setSelectedChats] = React.useState([]);
 
-    const getUsersList = async () => {
-        return await getApi("/api/user")
-            .then((res) => {
-                setUsersList(res.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
+  const chatHistoryRef = React.useRef(null);
+  const scrollToBottom = () => {
+    chatHistoryRef.current.scrollTop = chatHistoryRef.current.scrollHeight;
+  };
 
-    // const getChatList = async () => {
-    //     return await getApi("/api/chat/" + userId)
-    //         .then((res) => {
-    //             res.data.map((item, i) => {
-    //                 updatedChatList[i] = {
-    //                     // item,
-    //                     text: item.message,
-    //                     // title: item.senderId == userData.userId ? "You" : user,
-    //                     className: item.senderId == userData.userId ? "You" : "User",
-    //                     status: item.status,
-    //                     copiableDate: true,
-    //                     // dateString: new Date(),
-    //                     date: item.sentTime,
-    //                     focus: false,
-    //                     notch: false,
-    //                     type: "text",
-    //                     senderId: item.senderId,
-    //                     receiverId: item.receiverId,
-    //                     messageId: item.messageId,
-    //                     // createdAt: get(item, "sentTime", ""),
-    //                 };
-    //             });
-    //             setChatList(updatedChatList);
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-    // };
-
-    const navigate = useNavigate();
-    const handleClick = (nav) => {
-        console.log(nav);
-        navigate(nav);
-    };
-
-    const drawerWidth = 220;
-
-    const [open, setOpen] = React.useState(
-        window.innerWidth < 500 ? false : true
-    );
-    const theme = useTheme();
-
-    const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
-        ({ theme, open }) => ({
-            flexGrow: 1,
-            padding: theme.spacing(3),
-            transition: theme.transitions.create("margin", {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.leavingScreen,
-            }),
-            marginLeft: `-${drawerWidth}px`,
-            ...(open && {
-                transition: theme.transitions.create("margin", {
-                    easing: theme.transitions.easing.easeOut,
-                    duration: theme.transitions.duration.enteringScreen,
-                }),
-                marginLeft: 0,
-            }),
-        })
-    );
-
-    const sideBarData = [
-
-        {
-            text: "Select User",
-            icon: <SupervisedUserCircle className='iCons' />,
-            nav: "SelectUsers",
-        },
-    ];
-
-    return (
-        <Box className="waChat" sx={{ display: "flex", marginLeft: 100 }}>
-            <AppBar
-                className='appBar'
-                position="fixed"
-                open={open}
-            // style={{ backgroundColor: 'red' }}
-            >
-            </AppBar>
-            <Drawer
-                sx={{
-                    width: drawerWidth,
-                    marginTop: 100,
-                    flexShrink: 0,
-                    "& .MuiDrawer-paper": {
-                        width: drawerWidth,
-                        boxSizing: "border-box",
-                        marginLeft: 30,
-                        borderLeft: '1px solid #e5e5e5',
-                        marginTop: 8,
-                        backgroundColor: ' #ffffff'
-                        // paddingTop: 1
-                        // zIndex: -1
-                    },
-                }}
-                variant="persistent"
-                anchor="left"
-                open={open}
-            >
-                <List>
-                    {usersList.map((item, index) =>  (
-                        < ListItem
-                            key = { index }
-                            disablePadding
-                            onClick={() => handleClick(item.userId)}
-                    style={{ borderBottom: '1px solid #f3f3f3' }}
-                        >
-                    <ListItemButton>
-                        <ListItemIcon>{item.icon}</ListItemIcon>
-                        <ListItemText
-                            primary={item.userName}
-                        />
-                    </ListItemButton>
-                </ListItem>
-
-                    ))}
-
-            </List>
-            <Divider />
-            <Main open={open}>
-                {/* <DrawerHeader /> */}
-                <div className="route-container">
-                    <Outlet />
-                </div>
-            </Main>
-
-        </Drawer>
-        </Box >
-
-    );
-};
-
-export default WAChat;
+  return (
+    <ThemeProvider theme={theme}>
+      <Grid
+       
+        container
+        component="main"
+        className="main-cont"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          paddingTop: "48px"
+        }}
+      >
+        <CssBaseline />
+        <ChatListUi
+          chats={chats}
+          setSelectedChats={setSelectedChats}
+          setSelection={setSelection}
+        />
+        <ChatBoxUi
+          chats={chats}
+          setSelectedChats={setSelectedChats}
+          selectedChat={selectedChat}
+          selection={selection}
+        />
+      </Grid>
+    </ThemeProvider>
+  );
+}

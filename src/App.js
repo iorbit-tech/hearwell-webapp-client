@@ -13,7 +13,8 @@ import QuestionsDisplay from "./Pages/QuestionsDisplay";
 import { userData, authToken } from "./utils/authChecker";
 import SelectUsers from "./Pages/SelectUsers";
 import HearingDiary from "./Pages/HearingDiary";
-import WAChat from "./Pages/WhatsApp";
+// import WAChat from "./Pages/WhatsApp";
+import WAchatUi from "./Pages/WhatsApp";
 
 const App = () => {
   const nav = useNavigate();
@@ -24,7 +25,8 @@ const App = () => {
         console.log("auth is null");
         nav("/login");
       } else {
-        nav("/addquestions");
+      //  nav("/addquestions");
+        nav("/whatsappchat");
       }
       // <Navigate replace to="/addquestions" />
     } else {
@@ -46,7 +48,7 @@ const App = () => {
           <Route path="/allquestions" element={<QuestionsDisplay />} />
           <Route path="/selectUsers" element={<SelectUsers />} />
           <Route path="/hearingdiary/:username" element={<HearingDiary />} />
-          <Route path="/whatsappchat" element={<WAChat />} />
+          <Route path="/whatsappchat" element={<WAchatUi />} />
         </Route>
       </Routes>
     </div>
