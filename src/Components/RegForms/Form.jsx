@@ -191,6 +191,18 @@ export default function RegForm() {
                     onChange={(e) => onChangeHanddle(e)}
                   />
                 </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    name="confirmPassword"
+                    label="Confirm Password"
+                    type="password"
+                    id="confirmPassword"
+                    autoComplete="new-password"
+                    onChange={(e) => onChangeHanddle(e)}
+                  />
+                </Grid>
 
                 <Grid item xs={6}>
                   <Button
