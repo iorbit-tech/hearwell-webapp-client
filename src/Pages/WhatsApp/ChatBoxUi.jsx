@@ -1,11 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
-import { postApiCall } from "../../Webservice/Webservice";
+import { getApi, postApiCall } from "../../Webservice/Webservice";
 import "./style.scss";
 
-function ChatBoxUi({ selectedChat, selection }) {
+function ChatBoxUi({ selectedChat, selection, setSelectedChats }) {
   const [chatList, setChatList] = useState([]);
   const [message, setMessage] = useState("");
   const messagesEndRef = useRef(null);
+
+  const handleChatSelect = () => {
+    getApi("/api/webhook/from/" + selection).then((resp) => {
+      console.log(resp);
+      // setSelection(froms);
+      setSelectedChats(resp.data);
+    });
+    // const result = chats.filter((item) => item.from == froms);
+    //console.log(chats, result);
+  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({});
@@ -33,6 +43,7 @@ function ChatBoxUi({ selectedChat, selection }) {
     console.log("inside handle send", data);
     postApiCall("/api/webhook/send", data)
       .then((resp) => {
+        data.createdAt = new Date();
         console.log(resp);
         let temChat = [...chatList, data];
         setChatList(temChat);
@@ -61,9 +72,13 @@ function ChatBoxUi({ selectedChat, selection }) {
           chatList.map((item) => {
             return (
               <div className={item.reply ? `message-right` : `message-left`}>
-                <div style={{maxWidth:"80%"}}>
+                <div style={{ maxWidth: "80%" }}>
                   <p className="timestamp">
-                  {new Date(item.createdAt).toLocaleString('en-US', { hour: 'numeric',minute:'numeric',hour12: true })}
+                    {new Date(item.createdAt).toLocaleString("en-US", {
+                      hour: "numeric",
+                      minute: "numeric",
+                      hour12: true,
+                    })}
                   </p>
                   <p className="message">{item.messageBody}</p>
                 </div>
