@@ -16,9 +16,9 @@ const ChatListUi = ({ chats, setSelectedChats, setSelection }) => {
         filteredMessages.push(chat);
       }
     }
-    console.log(filteredMessages);
+    console.log(filteredMessages, "filtered messages ************************");
     setChatList(filteredMessages);
-  }, []);
+  }, [chats]);
 
   const handleChatSelect = (froms) => {
     getApi("/api/webhook/from/" + froms).then((resp) => {
@@ -35,7 +35,7 @@ const ChatListUi = ({ chats, setSelectedChats, setSelection }) => {
       style={{
         width: "30%",
         backgroundColor: "rgb(249, 252, 255)",
-      
+
         height: "100%",
         overflowY: "scroll",
       }}
@@ -48,7 +48,7 @@ const ChatListUi = ({ chats, setSelectedChats, setSelection }) => {
               onClick={() => handleChatSelect(item.from)}
               style={{
                 height: "60px",
-              
+
                 margin: 4,
                 padding: 8,
                 display: "flex",
@@ -69,10 +69,35 @@ const ChatListUi = ({ chats, setSelectedChats, setSelection }) => {
                     {item.from}
                   </p>
                 </div>
-                <p style={{ margin: 0, padding: 0, color: "GrayText" }}>
-                  {item.messageBody}
+                <p style={{ margin: 0, padding: 0, color: "GrayText",fontSize:"14px" }}>
+                  {item.messageBody.substring(0, 12)}...
                 </p>
               </div>
+              {item.status ? (
+                <></>
+              ) : (
+                <div
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  <p
+                    style={{
+                      fontSize: "9px",
+                      padding: "3px",
+                      backgroundColor: "red",
+                      borderRadius: "50%",
+                      height: "18px",
+                      width: "18px",
+                      textAlign: "center",
+                    }}
+                  >
+                    N
+                  </p>
+                </div>
+              )}
             </div>
           );
         })}

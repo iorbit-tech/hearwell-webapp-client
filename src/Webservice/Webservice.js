@@ -1,7 +1,7 @@
 import axios from "axios";
 import { authToken } from "../utils/authChecker";
 
-//export const baseUrl = 'http://178.128.165.237:8000';
+// export const baseUrl = 'http://178.128.165.237:8000';
 export const baseUrl = 'http://localhost:8000';
 export const postApi = (url, data) => {
   console.log(url, 'url POST');

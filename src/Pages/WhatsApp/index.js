@@ -3,7 +3,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { baseUrl, postApi } from "../../Webservice/Webservice";
+import { baseUrl, getApi, postApi } from "../../Webservice/Webservice";
 import { useNavigate, Link } from "react-router-dom";
 import { useEffect } from "react";
 import ChatUi from "./ChatUi";
@@ -116,14 +116,18 @@ export default function WAchatUi() {
       __v: 0,
     },
   ];
-  const [chats, setChats] = React.useState(ChatList);
+  const [chats, setChats] = React.useState([]);
   const [selection, setSelection] = React.useState("");
   const [selectedChat, setSelectedChats] = React.useState([]);
 
-  const chatHistoryRef = React.useRef(null);
-  const scrollToBottom = () => {
-    chatHistoryRef.current.scrollTop = chatHistoryRef.current.scrollHeight;
-  };
+ React.useEffect(()=>{
+  getApi("/api/webhook/unread").then((resp)=>{
+    console.log(resp,"respo from listtttt");
+    setChats(resp.data)
+  }).catch((err)=>{
+    console.log(err);
+  })
+ },[])
 
   return (
     <ThemeProvider theme={theme}>
